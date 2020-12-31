@@ -1,0 +1,56 @@
+<!-- Page Header Start-->
+<div class="page-main-header" [ngClass]="{'open' : navServices.collapseSidebar}" id="page-main-header">
+  <div class="main-header-right row">
+    <div class="main-header-left d-lg-none">
+      <div class="logo-wrapper"><a href="javascript::void(0)"><img src="assets/images/dceranic-logo.png" alt=""></a>
+      </div>
+    </div>
+    <div class="mobile-sidebar">
+      <div class="media-body text-right switch-sm">
+        <label class="switch">
+          <a href="javascript:void(0)" (click)="collapseSidebar()">
+            <app-feather-icons id="sidebar-toggle" [icon]="'align-left'">
+            </app-feather-icons>
+          </a>
+        </label>
+      </div>
+    </div>
+    <div class="nav-right col">
+      <ul class="nav-menus" [ngClass]="{'open' : openNav}">
+        <!--triggers li:first child-->
+        <li></li>
+        <li>
+          <a href="javascript:void(0)" class="text-dark" (click)="toggleFullScreen()">
+            <app-feather-icons [icon]="'maximize'"></app-feather-icons>
+          </a>
+        </li>
+        <li class="onhover-dropdown">
+          <a class="txt-dark" href="javascript:void(0)">
+            <h6>
+              <span *ngIf="language == 'en'; else hrLang"><i class="flag-icon flag-icon-gb"></i></span>
+              <ng-template #hrLang>
+                <span><i class="flag-icon flag-icon-hr"></i></span>
+              </ng-template>
+            </h6>
+          </a>
+          <ul class="language-dropdown onhover-show-div p-20">
+            <li><i class="flag-icon fa fa-flag mr-2"></i> {{ 'Change Language' | translate }}</li>
+            <li><a href="javascript:void(0)" data-lng="hr" *ngIf="language == 'en'" (click)="changeLanguage('hr')"><i
+                  class="flag-icon flag-icon-hr"></i> Hrvatski</a></li>
+            <li><a href="javascript:void(0)" data-lng="en" *ngIf="language == 'hr'" (click)="changeLanguage('en')"><i
+                  class="flag-icon flag-icon-gb"></i> English</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="javascript:void(0)" class="text-dark" routerLink="/kontakt">
+            <app-feather-icons [icon]="'help-circle'"></app-feather-icons>
+          </a>
+        </li>
+      </ul>
+      <div class="d-lg-none mobile-toggle pull-right" (click)="openMobileNav()">
+        <app-feather-icons [icon]="'more-horizontal'"></app-feather-icons>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page Header Ends -->

@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <div class="row leaflet-custom">
+    <div class="col-xl-12">
+      <div class="card p-0">
+        <div class="card-header">
+          <h5>{{ 'Mapa donacija' | translate }}</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="map-height" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

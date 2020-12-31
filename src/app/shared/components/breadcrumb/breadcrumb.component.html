@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-header-left">
+          <h3 class="txt-primary">{{title | translate}}</h3>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="'/dashboard'">
+                <app-feather-icons [icon]="'home'"></app-feather-icons>
+              </a></li>
+            <li class="breadcrumb-item" *ngIf="breadcrumbs?.parentBreadcrumb">{{breadcrumbs?.parentBreadcrumb | translate}}</li>
+            <li class="breadcrumb-item active" *ngIf="breadcrumbs?.childBreadcrumb">{{breadcrumbs?.childBreadcrumb | translate}}
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

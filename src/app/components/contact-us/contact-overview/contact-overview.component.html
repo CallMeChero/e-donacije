@@ -1,0 +1,67 @@
+<div class="col-lg-12">
+  <div class="card">
+    <div class="calender-widget">
+      <div class="cal-img"></div>
+      <div class="cal-date">
+        <h5>{{ 'Contact Us' | translate}}</h5>
+      </div>
+      <div class="cal-desc text-center card-body">
+        <form class="theme-form" [formGroup]="contactGroup" #ngContactForm="ngForm" (ngSubmit)="sendForm()">
+          <div class="form-group">
+            <label for="exampleInputName">{{ 'Your Name' | translate }}</label>
+            <input class="form-control" id="exampleInputName" formControlName="name" type="text"
+              placeholder="Marko Marković"
+              [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched || ngContactForm.submitted)}">
+            <div class="invalid-feedback"
+              *ngIf="name.invalid && name.errors?.required && (name.dirty || name.touched || ngContactForm.submitted)">
+              {{ 'Name is required' | translate}}.
+            </div>
+            <div class="invalid-feedback"
+              *ngIf="name.invalid && name.errors?.minlength && (name.dirty || name.touched || ngContactForm.submitted)">
+              {{ 'Name must contain atleast 5 characters' | translate}}.
+            </div>
+            <div class="invalid-feedback"
+              *ngIf="name.invalid && name.errors?.maxlength && (name.dirty || name.touched || ngContactForm.submitted)">
+              {{ 'Name must have less than 30 characters' | translate}}.
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label" for="exampleInputEmail1">Email</label>
+            <input class="form-control" id="exampleInputEmail1" formControlName="email" type="email"
+              [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched || ngContactForm.submitted)}"
+              placeholder="marko.markovic@gmail.com">
+            <div class="invalid-feedback"
+              *ngIf="email.invalid && email.errors?.required && (email.dirty || email.touched || ngContactForm.submitted)">
+              {{ 'Email is required' | translate}}.
+            </div>
+            <div class="invalid-feedback"
+              *ngIf="email.invalid && email.errors?.email && (email.dirty || email.touched || ngContactForm.submitted)">
+              {{ 'Email is not correct' | translate}}.
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label" for="exampleInputEmail1">Poruka</label>
+            <textarea class="form-control textarea" formControlName="message" rows="3" cols="50"
+              [ngClass]="{'is-invalid': message.invalid && (message.dirty || message.touched || ngContactForm.submitted)}"
+              placeholder="Poštovani molimo vas..."></textarea>
+            <div class="invalid-feedback"
+              *ngIf="message.invalid && message.errors?.required  && (message.dirty || message.touched || ngContactForm.submitted)">
+              {{ 'Message is required' | translate}}.
+            </div>
+            <div class="invalid-feedback"
+              *ngIf="message.invalid && message.errors?.minlength  && (message.dirty || message.touched || ngContactForm.submitted)">
+              {{ 'Message must contain atleast 10 characters' | translate}}.
+            </div>
+            <div class="invalid-feedback"
+              *ngIf="message.invalid && message.errors?.maxlength  && (message.dirty || message.touched || ngContactForm.submitted)">
+              {{ 'Message must have less than 1000 characters' | translate }}.
+            </div>
+          </div>
+          <div class="text-sm-right">
+            <button class="btn btn-primary-gradien">{{ 'SEND' | translate }}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

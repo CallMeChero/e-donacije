@@ -1,0 +1,19 @@
+<div class="modal-header" [ngClass]="{'header-danger': isDelete}">
+    <h4 class="modal-title" [ngClass]="{'text-white': isDelete, 'text-primary': !isDelete}" id="modal-title">{{ title }}</h4>
+</div>
+<div class="modal-body">
+    <p>
+        <strong>{{ description }}</strong>
+    </p>
+    <p  class="mb-0" *ngIf="isDelete">
+        <span class="text-danger"> Ova je akcija trajna</span>
+    </p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary mr-auto" (click)="modal.dismiss('cancel')">
+      <span>Odustani</span>
+    </button>
+    <button type="button" ngbAutofocus class="btn"  [ngClass]="{'btn-primary': !isDelete , 'btn-danger': isDelete}" (click)="modal.close(true)">
+      <span>Potvrdi</span>
+    </button>
+</div>
