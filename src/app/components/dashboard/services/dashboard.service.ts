@@ -4,10 +4,11 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { ISummary } from 'src/app/components/dashboard/models/summary';
 import { UrlHelperService } from 'src/app/shared/services/url-helper.service';
 import { DatePipe } from '@angular/common';
+import { EDonacijeResponse } from 'src/app/shared/models/e-donacije-response';
 
 @Injectable({
   providedIn: 'root',
@@ -47,11 +48,11 @@ export class DashboardService {
   }
 
   // total visits
-  getSummary(): Observable<ISummary> {
+  getSummary(): Observable<EDonacijeResponse<ISummary>> {
     const url = this._urlHelper.getUrl(this.TICKER_CONTROLER, 'summary');
     const requestParams = this._urlHelper.getQueryParameters({finished: true });
     return this._http
-      .get<ISummary>(url,{ params: requestParams })
+      .get<EDonacijeResponse<ISummary>>(url,{ params: requestParams })
       .pipe(
         tap((data) => console.log('Get all sumaries', data)),
         catchError(this.handleError)

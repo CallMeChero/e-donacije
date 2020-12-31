@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { first } from 'rxjs/operators';
+import { EMPTY, Observable } from 'rxjs';
+import { catchError, first, map, take } from 'rxjs/operators';
+import { EDonacijeResponse } from 'src/app/shared/models/e-donacije-response';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { IOwlSlider } from '../models/owl-slider';
+import { ISummary } from '../models/summary';
 import { DashboardService } from '../services/dashboard.service'
 
 @Component({
@@ -39,7 +43,8 @@ export class DashboardOverviewComponent implements OnInit {
 
   /* #region  Constructor */
   constructor(
-    private readonly _dashboardService: DashboardService
+    private readonly _dashboardService: DashboardService,
+    private readonly __notificationService: NotificationService
   ) { }
   /* #endregion */
 
@@ -48,9 +53,21 @@ export class DashboardOverviewComponent implements OnInit {
     this._dashboardService.getRecentEarthquakes().pipe(first()).subscribe(
       response => { this.dashboardSlider[2].number = response }
     )
-    this._dashboardService.getSummary().pipe(first()).subscribe(
-      response => { this.dashboardSlider[0].number = response.finished; this.dashboardSlider[1].number = response.unfinished }
+    this._dashboardService.getSummary().pipe(
+      take(1),
+      catchError((err) => this.catchAndReplaceError(err)),
+      map(res => res.response.data)
+      ).subscribe(
+      (response: ISummary) => {
+        this.dashboardSlider[0].number = response.finished; this.dashboardSlider[1].number = response.unfinished
+      }
     )
+  }
+
+  // Error handling
+  catchAndReplaceError(errorMessage: string): Observable<never> {
+    this.__notificationService.fireErrorNotification(errorMessage);
+    return EMPTY;
   }
   /* #endregion */
 
