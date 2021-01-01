@@ -55,7 +55,7 @@ export class MapOverviewComponent implements OnInit {
     // L.geoJSON(this.json).addTo(map);
     map.setMaxBounds(this.maxBounds);
     map.setMaxZoom(18);
-    map.setMinZoom(6);
+    map.setMinZoom(8);
     // });
   }
   /* #endregion */

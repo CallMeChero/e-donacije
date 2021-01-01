@@ -1,0 +1,174 @@
+<form [formGroup]="informationGroup" class="ngx-form" novalidate>
+  <div class="row mt-5 mb-1">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  mb-3">
+      <div class="form-group">
+        <label class="control-label" for="firstName">{{ 'First Name' | translate }}<span
+            class="text-danger">*</span></label>
+        <input type="text" formControlName="firstName" class="form-control" placeholder="npr. Marko Ivan"
+          [ngClass]="{'is-invalid': firstName.invalid && (firstName.dirty || firstName.touched)}">
+        <div class="invalid-feedback"
+          *ngIf="firstName.invalid && firstName.errors?.required && (firstName.dirty || firstName.touched)">
+          {{ 'First Name is required' | translate}}.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="firstName.invalid && firstName.errors?.minlength && (firstName.dirty || firstName.touched)">
+          {{ 'First Name must contain atleast 3 characters' | translate}}.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="firstName.invalid && firstName.errors?.maxlength && (firstName.dirty || firstName.touched)">
+          {{ 'First Name must have less than 30 characters' | translate}}.
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  mb-3">
+      <div class="form-group">
+        <label class="control-label" for="lastName">{{ 'Last Name' | translate }}<span
+            class="text-danger">*</span></label>
+        <input type="text" formControlName="lastName" class="form-control" placeholder="npr. Marković-Horvat"
+          [ngClass]="{'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched)}">
+        <div class="invalid-feedback"
+          *ngIf="lastName.invalid && lastName.errors?.required && (lastName.dirty || lastName.touched)">
+          {{ 'Last Name is required' | translate}}.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="lastName.invalid && lastName.errors?.minlength && (lastName.dirty || lastName.touched)">
+          {{ 'Last Name must contain atleast 3 characters' | translate}}.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="lastName.invalid && lastName.errors?.maxlength && (lastName.dirty || lastName.touched)">
+          {{ 'Last Name must have less than 30 characters' | translate}}.
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-3">
+      <div class="form-group">
+        <label class="control-label" for="contactNumber">{{ 'Contact Number' | translate }}<span
+            class="text-danger">*</span></label>
+        <input type="text" formControlName="contactNumber" class="form-control" placeholder="npr. 044-12-34-567"
+          [ngClass]="{'is-invalid': contactNumber.invalid && (contactNumber.dirty || contactNumber.touched)}">
+        <div class="invalid-feedback"
+          *ngIf="contactNumber.invalid && contactNumber.errors?.required && (contactNumber.dirty || contactNumber.touched)">
+          {{ 'Contact Number is required' | translate}}.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="contactNumber.invalid && contactNumber.errors?.pattern && (contactNumber.dirty || contactNumber.touched)">
+          {{ 'Contact Number must contain between 7 and 13 numbers and characters -' | translate}}.
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-3">
+      <div class="form-group">
+        <label class="control-label" for="secondContactNumber">{{ 'Second Contact Number' | translate }}</label>
+        <input type="text" formControlName="secondContactNumber" class="form-control" placeholder="npr. 099-123-456"
+          [ngClass]="{'is-invalid': secondContactNumber.invalid && (secondContactNumber.dirty || secondContactNumber.touched)}">
+        <div class="invalid-feedback"
+          *ngIf="secondContactNumber.invalid && secondContactNumber.errors?.pattern && (secondContactNumber.dirty || secondContactNumber.touched)">
+          {{ 'Contact Number must contain between 7 and 13 numbers and characters -' | translate}}.
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-3">
+      <div class="form-group">
+        <label class="control-label" for="firstname">{{ 'Bank Name' | translate }} ({{ 'For foreign transactions' |
+          translate }})</label>
+        <input type="text" formControlName="bankName" class="form-control" placeholder="npr. Privredna banka Zagreb"
+          [ngClass]="{'is-invalid': bankName.invalid && (bankName.dirty || bankName.touched)}">
+        <div class="invalid-feedback"
+          *ngIf="bankName.invalid && bankName.errors?.minlength && (bankName.dirty || bankName.touched)">
+          {{ 'Bank Name must contain up to 25 characters' | translate}}.
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-3">
+      <div class="form-group input-group-solid">
+        <label class="control-label" for="iban">{{ 'IBAN' | translate }}</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">HR</span>
+          </div>
+          <input type="text" formControlName="iban" class="form-control" placeholder="npr. 1234567890123456789"
+            [ngClass]="{'is-invalid': iban.invalid && (iban.dirty || iban.touched)}">
+        </div>
+        <div class="input-group-feedback" *ngIf="iban.invalid && iban.errors?.pattern && (iban.dirty || iban.touched)">
+          {{ 'IBAN must contain 19 numbers' | translate}}.
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12  mb-3">
+      <div class="form-group">
+        <label class="control-label" for="address">{{ 'Address' | translate }}<span class="text-danger">*</span></label>
+        <input type="text" formControlName="address" class="form-control" placeholder="npr. Ivane Brlić Mažuranić"
+          [ngClass]="{'is-invalid': address.invalid && (address.dirty || address.touched)}">
+        <div class="invalid-feedback"
+          *ngIf="address.invalid && address.errors?.required && (address.dirty || address.touched)">
+          {{ 'Address is required' | translate}}.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="address.invalid && address.errors?.minlength && (address.dirty || address.touched)">
+          {{ 'Address must contain atleast 3 characters' | translate}}.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="address.invalid && address.errors?.maxlength && (address.dirty || address.touched)">
+          {{ 'Address must have less than 40 characters' | translate}}.
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-3">
+      <div class="form-group">
+        <label class="control-label" for="addressNumber">{{ 'Address Number' | translate }}<span
+            class="text-danger">*</span></label>
+        <input type="text" formControlName="addressNumber" class="form-control" placeholder="npr. 2a"
+          [ngClass]="{'is-invalid': addressNumber.invalid && (addressNumber.dirty || addressNumber.touched)}">
+        <div class="invalid-feedback">
+          {{ 'Address Number is required' | translate}}.
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-3">
+      <div class="form-group">
+        <label class="control-label" for="postalCode">{{ 'Postal Code' | translate }}<span
+            class="text-danger">*</span></label>
+        <input type="text" formControlName="postalCode" class="form-control" placeholder="12132"
+          [ngClass]="{'is-invalid': postalCode.invalid && (postalCode.dirty || postalCode.touched)}">
+        <div class="invalid-feedback"
+          *ngIf="postalCode.invalid && postalCode.errors?.required && (postalCode.dirty || postalCode.touched)">
+          {{ 'Postal Code is required' | translate}}.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="postalCode.invalid && postalCode.errors?.minlength && (postalCode.dirty || postalCode.touched)">
+          {{ 'Postal Code contain atleast 3 characters' | translate}}.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="postalCode.invalid && postalCode.errors?.maxlength && (postalCode.dirty || postalCode.touched)">
+          {{ 'Postal Code have less than 40 characters' | translate}}.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="postalCode.invalid && postalCode.errors?.pattern && (postalCode.dirty || postalCode.touched)">
+          {{ 'Postal Code must be a number' | translate}}.
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12 mb-3">
+      <div class="form-group">
+        <label class="col-form-label" for="body">{{ 'Message' | translate}}</label>
+        <textarea class="form-control textarea" formControlName="body" rows="3" cols="50"
+          [ngClass]="{'is-invalid': body.invalid && (body.dirty || body.touched)}"
+          placeholder="Poštovani molimo vas za hranu, pitku vodu, pomoć u izradi, pomoć pri nabavi i sl."></textarea>
+        <div class="invalid-feedback" *ngIf="body.invalid && body.errors?.required  && (body.dirty || body.touched)">
+          {{ 'Message is required' | translate}}.
+        </div>
+        <div class="invalid-feedback" *ngIf="body.invalid && body.errors?.minlength  && (body.dirty || body.touched)">
+          {{ 'Message must contain atleast 10 characters' | translate}}.
+        </div>
+        <div class="invalid-feedback" *ngIf="body.invalid && body.errors?.maxlength  && (body.dirty || body.touched)">
+          {{ 'Message must have less than 150 characters' | translate }}.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group f1-buttons">
+    <button class="btn btn-primary btn-next" awNextStep>{{ 'Next' | translate}}
+      <!-- [disabled]="informationGroup.invalid" -->
+    </button>
+  </div>
+</form>

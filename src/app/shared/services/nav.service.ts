@@ -51,6 +51,9 @@ export class NavService {
       path: '/naslovna', title: 'Dashboard', icon: 'monitor', type: 'link', badgeType: 'primary', badgeValue: 'new', active: true
     },
     {
+      path: '/donacija', title: 'Need Donation', icon: 'alert-triangle', type: 'link', badgeType: 'primary', badgeValue: 'new', active: true
+    },
+    {
       path: '/mapa', title: 'Map', icon: 'map', type: 'link', badgeType: 'primary', badgeValue: 'new', active: true
     },
     {

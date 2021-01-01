@@ -10,6 +10,10 @@ export const content: Routes = [
     loadChildren: () => import('../../components/map/map.module').then(m => m.MapModule)
   },
   {
+    path: 'donacija',
+    loadChildren: () => import('../../components/application-wizard/application-wizard.module').then(m => m.ApplicationWizardModule)
+  },
+  {
     path: 'kontakt',
     loadChildren: () => import('../../components/contact-us/contact-us.module').then(m => m.ContactUsModule)
   },

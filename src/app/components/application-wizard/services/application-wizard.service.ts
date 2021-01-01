@@ -6,14 +6,16 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { UrlHelperService } from 'src/app/shared/services/url-helper.service';
-import { IContactForm } from '../models/request/contact-form';
+import { IApplicationAddress } from '../models/request/application-address';
+import { IApplicationMap } from '../models/request/application-map';
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class ContactUsService {
+export class ApplicationWizardService {
   /* #region  Variables */
-  private readonly CONTACT_CONTROLLER = 'contact';
+  private readonly TICKER_CONTROLLER = 'contact';
   /* #endregion */
 
   /* #region  Constructor */
@@ -26,13 +28,25 @@ export class ContactUsService {
   /* #region  Methods */
 
   // Post contact form
-  sendContactForm(formValues: IContactForm): Observable<number> {
-    const url = this._urlHelper.getUrl(this.CONTACT_CONTROLLER);
+  sendAddress(formValues: IApplicationAddress): Observable<any> {
+    const url = this._urlHelper.getUrl(this.TICKER_CONTROLLER);
     const request = {...formValues}
     return this._http
-      .post<number>(url, request)
+      .post<any>(url, request)
       .pipe(
-        tap((data) => console.log('Post contact form', data)),
+        tap((data) => console.log('Post address step', data)),
+        catchError(this.handleError)
+      );
+  }
+
+  // Send marker lang & lat
+  sendLocation(values): Observable<any> {
+    const url = this._urlHelper.getUrl(this.TICKER_CONTROLLER);
+    const request: IApplicationMap = {...values};
+    return this._http
+      .post<any>(url, request)
+      .pipe(
+        tap((data) => console.log('Post map step', data)),
         catchError(this.handleError)
       );
   }
