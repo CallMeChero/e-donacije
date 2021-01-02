@@ -2,8 +2,20 @@
   <div class="row leaflet-custom">
     <div class="col-xl-12">
       <div class="card p-0">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between">
           <h5>{{ 'Donation map' | translate }}</h5>
+          <ng-template #popContent>
+            {{ 'You might find useful to get SWIFT/BIC codes of Croatian Banks' | translate }}:
+            <a target="_blank" href="https://www.theswiftcodes.com/croatia/">SWIFT</a>
+            <br>
+            {{ 'Furthermore here you can find VBDI codes here' | translate}}:
+            <a target="_blank" href="https://elementa.otpbanka.hr/gradjani/demo/lista_vbdi.html">VBDI</a>
+          </ng-template>
+          <ng-template #popTitle>{{ 'Tips for foreign donations' | translate }}</ng-template>
+          <button type="button" class="btn btn-outline-primary btn-xs-eplisis" style="font-size: 10px;"
+            [ngbPopover]="popContent" [popoverTitle]="popTitle">
+            {{'How to donate from foreign country?' | translate }}
+          </button>
         </div>
         <div class="card-body p-0">
           <div class="map-height" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>

@@ -1,5 +1,19 @@
 <div class="container-fluid">
   <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-header b-b-primary">
+          <h5>{{ 'Information about application' | translate }}</h5>
+        </div>
+        <div class="card-body">
+          <p>{{ 'Dear people' | translate }}, <br>
+            {{ 'Dashboard quote long' | translate }}<br>
+            {{ 'Thank you all for help!' | translate}} <i class="fa fa-heart"></i>
+            <br>Ines, David & Davor
+          </p>
+        </div>
+      </div>
+    </div>
     <div class="col-sm-6 col-xl-3 col-lg-6" *ngFor="let slide of dashboardSlider">
       <div class="card o-hidden">
         <div class="bg-primary b-r-4 card-body">
@@ -19,18 +33,28 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-12">
+    <div class="col-sm-12">
       <div class="card">
-        <div class="card-header b-b-primary">
-          <h5>{{ 'Information about application' | translate }}</h5>
+        <div class="card-header  b-b-primary">
+          <h5>{{ 'Earthquake Table' | translate }}</h5>
         </div>
-        <div class="card-body">
-          <p>{{ 'Dear people' | translate }}, <br>
-            {{ 'Dashboard quote long' | translate }}<br>
-            {{ 'Thank you all for help!' | translate}} <i class="fa fa-heart"></i>
-            <br>Ines, David & Davor
-          </p>
+        <div class="card-body custom-datatable">
+          <ngx-datatable class="bootstrap" [rows]="earthquakeRows" [columns]="columns" [columnMode]="'force'"
+            [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [limit]="10" [scrollbarH]="true" [messages]="{
+              emptyMessage: currentLang == 'hr' ? 'Nema rezultata' : 'No entries',
+              totalMessage: currentLang == 'hr' ? 'ukupno' : 'total'}">
+          </ngx-datatable>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 mt-3">
+    <div class="card">
+      <div class="card-header  b-b-primary">
+        <h5>{{ 'Earthquake Map' | translate }}</h5>
+      </div>
+      <div class="card-body p-0 mt-3 leaflet-custom">
+        <div class="map-height" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
       </div>
     </div>
   </div>

@@ -5,6 +5,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { DashboardService } from './services/dashboard.service';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [DashboardOverviewComponent],
@@ -12,6 +14,8 @@ import { DashboardService } from './services/dashboard.service';
     CommonModule,
     SharedModule,
     CarouselModule,
+    NgxDatatableModule,
+    LeafletModule.forRoot(),
     // Malo ruta pa nema potrebe za novim file-om
     RouterModule.forChild([
       {

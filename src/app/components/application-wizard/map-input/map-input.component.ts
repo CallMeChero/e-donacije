@@ -68,7 +68,7 @@ export class MapInputComponent implements OnInit, OnChanges{
 
   editLocation(): void {
     this.isEdit = !this.isEdit;
-    if(this.newMarker && !this.initialMarker) {
+    if(!this.map.hasLayer(this.initialMarker) && this.newMarker && this.map.hasLayer(this.newMarker)) {
       this.map.removeLayer(this.newMarker);
       this.initMarkers();
     }
@@ -103,10 +103,10 @@ export class MapInputComponent implements OnInit, OnChanges{
   }
 
   saveStep(): void {
-    const editActive = this.isEdit ? this.newMarker.getLatLng() : this.initialMarker.getLatLng();
+    const activeMarker = this.map.hasLayer(this.initialMarker) ? this.initialMarker.getLatLng() : this.newMarker.getLatLng()
     const values: IApplicationMap = {
-      lat: editActive.lat.toString(),
-      lng: editActive.lng.toString()
+      lat: activeMarker.lat.toString(),
+      lng: activeMarker.lng.toString()
     }
     this._applicationWizardService.sendLocation(values).pipe(take(1)).subscribe(
       data => {

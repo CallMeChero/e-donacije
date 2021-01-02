@@ -54,10 +54,10 @@ export class NavService {
       path: '/donacija', title: 'Need Donation', icon: 'alert-triangle', type: 'link', badgeType: 'primary', badgeValue: 'new', active: true
     },
     {
-      path: '/mapa', title: 'Map', icon: 'map', type: 'link', badgeType: 'primary', badgeValue: 'new', active: true
+      path: '/mapa', title: 'Want to donate', icon: 'map', type: 'link', badgeType: 'primary', badgeValue: 'new', active: true
     },
     {
-      path: '/o-nama', title: 'About Us', icon: 'map', type: 'link', badgeType: 'primary', badgeValue: 'new', active: true
+      path: '/o-nama', title: 'About Us', icon: 'info', type: 'link', badgeType: 'primary', badgeValue: 'new', active: true
     },
   ];
 

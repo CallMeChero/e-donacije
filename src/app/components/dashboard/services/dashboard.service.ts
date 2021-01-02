@@ -18,7 +18,7 @@ export class DashboardService {
   dateNow: string;
   yesterday: string;
   private readonly TICKER_CONTROLER = 'tickets';
-  private readonly EARTHQUAKE_API = 'https://earthquake.usgs.gov/fdsnws/event/1/count';
+  private readonly EARTHQUAKE_API = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
   /* #endregion */
 
   /* #region  Constructor */
@@ -36,11 +36,17 @@ export class DashboardService {
   /* #region  Methods */
 
   // Get earthquakes
-  getRecentEarthquakes(): Observable<number> {
+  getRecentEarthquakes(): Observable<any> {
     const url = this.EARTHQUAKE_API;
-    const requestParams = this._urlHelper.getQueryParameters({starttime: this.yesterday,endtime: this.dateNow});
+    const requestParams = this._urlHelper.getQueryParameters({
+      starttime: '2020-12-25',
+      endtime: this.dateNow,
+      latitude: 45.3770786,
+      longitude:16.3204046,
+      maxradiuskm:100
+    });
     return this._http
-      .get<number>(url,{ params: requestParams })
+      .get<any>(url,{ params: requestParams })
       .pipe(
         tap((data) => console.log('Get past 24 hours earthquakes', data)),
         catchError(this.handleError)
