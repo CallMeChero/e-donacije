@@ -33,6 +33,16 @@
         </div>
       </div>
     </div>
+    <div class="col-lg-12 mt-3">
+      <div class="card">
+        <div class="card-header  b-b-primary">
+          <h5>{{ 'Earthquake Map' | translate }}</h5>
+        </div>
+        <div class="card-body p-0 mt-3 leaflet-custom">
+          <div class="map-height" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
+        </div>
+      </div>
+    </div>
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header  b-b-primary">
@@ -45,16 +55,6 @@
               totalMessage: currentLang == 'hr' ? 'ukupno' : 'total'}">
           </ngx-datatable>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-12 mt-3">
-    <div class="card">
-      <div class="card-header  b-b-primary">
-        <h5>{{ 'Earthquake Map' | translate }}</h5>
-      </div>
-      <div class="card-body p-0 mt-3 leaflet-custom">
-        <div class="map-height" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
       </div>
     </div>
   </div>

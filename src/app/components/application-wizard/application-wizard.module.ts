@@ -7,11 +7,11 @@ import { MapInputComponent } from './map-input/map-input.component';
 import { InformationInputComponent } from './information-input/information-input.component';
 import { WizardNavBarComponent } from './wizard-nav-bar/wizard-nav-bar.component';
 import { ArchwizardModule } from 'angular-archwizard';
-import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UploadInputComponent } from './upload-input/upload-input.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,7 @@ import { UploadInputComponent } from './upload-input/upload-input.component';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    FileUploadModule,
     LeafletModule.forRoot(),
     RouterModule.forChild([
       {
