@@ -42,12 +42,8 @@
           {{ 'Postal Code is required' | translate}}.
         </div>
         <div class="invalid-feedback"
-          *ngIf="postalCode.invalid && postalCode.errors?.minlength && (postalCode.dirty || postalCode.touched)">
-          {{ 'Postal Code contain atleast 4 characters' | translate}}.
-        </div>
-        <div class="invalid-feedback"
-          *ngIf="postalCode.invalid && postalCode.errors?.maxlength && (postalCode.dirty || postalCode.touched)">
-          {{ 'Postal Code have less than 5 characters' | translate}}.
+          *ngIf="postalCode.invalid && (postalCode.errors?.maxlength || postalCode.errors?.minlength) && (postalCode.dirty || postalCode.touched)">
+          {{ 'Postal Code has 5 characters' | translate}}.
         </div>
         <div class="invalid-feedback"
           *ngIf="postalCode.invalid && postalCode.errors?.pattern && (postalCode.dirty || postalCode.touched)">

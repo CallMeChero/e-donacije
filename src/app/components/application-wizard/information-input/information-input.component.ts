@@ -36,7 +36,7 @@ export class InformationInputComponent implements OnInit {
       iban: ['', [Validators.pattern('^[0-9]{19}$')]],
       address: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
       addressNumber: ['', [Validators.required]],
-      postalCode: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(5),Validators.pattern('^[0-9]*$')]],
+      postalCode: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5),Validators.pattern('^[0-9]*$')]],
       body: ['', [Validators.minLength(10), Validators.maxLength(150)]]
     });
   }
