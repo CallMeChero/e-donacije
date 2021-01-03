@@ -34,6 +34,7 @@
   "Email is required": "Email is required",
   "Email is not correct": "Email is not correct",
   "Message is required": "Message is required",
+  "IBAN must contain 19 numbers": "IBAN must contain 19 numbers",
   "Message must contain atleast 10 characters": "Message must contain atleast 10 characters",
   "Message must have less than 200 characters": "Message must have less than 200 characters",
   "Message must have less than 150 characters": "Message must have less than 150 characters",

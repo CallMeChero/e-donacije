@@ -4,6 +4,7 @@ import { take } from 'rxjs/operators';
 import { IApplicationMap } from '../models/request/application-map';
 import { ApplicationWizardService } from '../services/application-wizard.service';
 import { LatitudeLongitudeDeterminator } from '../services/determinators/latitute-longitude.determinator';
+import { RequestIdDeterminator } from '../services/determinators/request-id.determinator';
 
 @Component({
   selector: 'poke-information-input',
@@ -21,6 +22,7 @@ export class InformationInputComponent implements OnInit {
   constructor(
     private readonly _applicationWizardService: ApplicationWizardService,
     private _latitudeLongitudeDeterminator: LatitudeLongitudeDeterminator,
+    private _requestIdDeterminator: RequestIdDeterminator,
     private _fb: FormBuilder
   ) { }
   /* #endregion */
@@ -44,7 +46,7 @@ export class InformationInputComponent implements OnInit {
       bankName: ['', Validators.maxLength(25)],
       iban: ['', [Validators.pattern('^[0-9]{19}$')]],
       address: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
-      addressNumber: ['', [Validators.required]],
+      addressNumber: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       postalCode: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5),Validators.pattern('^[0-9]*$')]],
       body: ['', [Validators.minLength(10), Validators.maxLength(150)]]
     });
@@ -58,7 +60,7 @@ export class InformationInputComponent implements OnInit {
       if(this.informationGroup.dirty) {
         this._applicationWizardService.sendInformationStep(this.informationGroup.value, this.latAndLang).pipe(take(1)).subscribe(
           data => {
-            console.log('success')
+            this._requestIdDeterminator.changeRequestId(data)
           }
         )
       }

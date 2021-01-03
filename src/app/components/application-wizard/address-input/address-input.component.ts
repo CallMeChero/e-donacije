@@ -33,14 +33,6 @@ export class AddressInputComponent implements OnInit {
       postalCode: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5),Validators.pattern('^[0-9]*$')]]
     });
   }
-
-  save() {
-    this._applicationWizardService.sendAddress(this.addressGroup.value).pipe(take(1)).subscribe(
-      data => {
-
-      }
-    )
-  }
   /* #endregion */
 
    /* #region  Abstract Controls */

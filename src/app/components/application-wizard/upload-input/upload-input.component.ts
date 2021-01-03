@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { FileLikeObject, FileUploader } from 'ng2-file-upload';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { RequestIdDeterminator } from '../services/determinators/request-id.determinator';
 
 // const URL = '/api/';
-const URL = 'https://httpbin.org/post';
+const URL = 'https://edonacijeapi.azurewebsites.net/DonationRequest/uploadImage/';
 
 @Component({
   selector: 'poke-upload-input',
@@ -25,33 +26,39 @@ export class UploadInputComponent implements OnInit {
 
   constructor(
     private _translateService: TranslateService,
-    private _notificationService: NotificationService
+    private _notificationService: NotificationService,
+    private _requestIdDeterminator: RequestIdDeterminator
   ) {
     this.activeLang = _translateService.currentLang;
-    this.uploader = new FileUploader({
-      url: URL,
-      isHTML5: true,
-      maxFileSize: this.maxFileSize,
-      allowedMimeType: this.allowedMimeTypes,
-      queueLimit : 3
-    });
-    this.uploader.onWhenAddingFileFailed = (item, filter, options) => this.onWhenAddingFileFailed(item, filter, options);
-    this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
    }
 
   ngOnInit(): void {
+    this._requestIdDeterminator.requestId.subscribe(
+      data => {
+        this.uploader = new FileUploader({
+          url: URL + data,
+          isHTML5: true,
+          maxFileSize: this.maxFileSize,
+          allowedMimeType: this.allowedMimeTypes,
+          queueLimit : 2
+        });
+        this.uploader.onWhenAddingFileFailed = (item, filter, options) => this.onWhenAddingFileFailed(item, filter, options);
+        this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
+      }
+    );
   }
 
   onSuccessItem(item, response, status, headers) {
     console.log(response)
   }
+
   onWhenAddingFileFailed(item: FileLikeObject, filter: any, options: any): void {
     const title = this.activeLang !== 'hr' ? "Greška": "Error";
     switch (filter.name) {
       case 'queueLimit':
         const queueLimitMsg = this.activeLang !== 'hr' ?
-        "Maximum number of files for upload is set to 3.":
-        "Maksimalni broj datoteka je 3."
+        "Maximum number of files for upload is set to 2.":
+        "Maksimalni broj datoteka je 2."
         this._notificationService.fireErrorNotification(title,queueLimitMsg);
         break;
       case 'fileSize':

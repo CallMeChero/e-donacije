@@ -67,7 +67,10 @@
             </div>
           </div>
         </div>
-        <button type="button" (click)="finishWithWizard()">{{ 'Finish' | translate }}</button>
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-primary btn-next" (click)="finishWithWizard()">{{ 'Finish' | translate
+            }}</button>
+        </div>
       </div>
     </div>
   </div>
