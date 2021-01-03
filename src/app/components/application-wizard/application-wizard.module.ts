@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
 import { RouterModule } from '@angular/router';
-import { AddressInputComponent } from './address-input/address-input.component';
 import { MapInputComponent } from './map-input/map-input.component';
 import { InformationInputComponent } from './information-input/information-input.component';
 import { WizardNavBarComponent } from './wizard-nav-bar/wizard-nav-bar.component';
@@ -16,7 +15,6 @@ import { FileUploadModule } from 'ng2-file-upload';
 @NgModule({
   declarations: [
     WizardStepsComponent,
-    AddressInputComponent,
     MapInputComponent,
     InformationInputComponent,
     WizardNavBarComponent,

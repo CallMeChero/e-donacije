@@ -30,9 +30,8 @@
                       </div>
                     </td>
                     <td>
-                      <span *ngIf="item.isSuccess"><i style="background-color: green;"
-                          class="fa fa-check-square-o"></i></span>
-                      <span *ngIf="item.isError"><i style="background-color: crimson;" class="fa fa-trash"></i></span>
+                      <span *ngIf="item.isSuccess"><i style="color: green;" class="fa fa-check-square-o"></i></span>
+                      <span *ngIf="item.isError"><i style="color: crimson;" class="fa fa-trash"></i></span>
                     </td>
                     <td nowrap>
                       <button type="button" class="btn btn-success btn-xs mr-1" (click)="item.upload()"
