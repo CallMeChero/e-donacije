@@ -10,7 +10,7 @@ import { LatitudeLongitudeDeterminator } from '../services/determinators/latitut
 import { RequestIdDeterminator } from '../services/determinators/request-id.determinator';
 
 @Component({
-  selector: 'poke-information-input',
+  selector: 'app-information-input',
   templateUrl: './information-input.component.html',
   styleUrls: ['./information-input.component.scss']
 })

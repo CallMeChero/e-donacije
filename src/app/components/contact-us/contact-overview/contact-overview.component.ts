@@ -6,7 +6,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'poke-contact-overview',
+  selector: 'app-contact-overview',
   templateUrl: './contact-overview.component.html',
   styleUrls: ['./contact-overview.component.scss']
 })

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'poke-wizard-steps',
+  selector: 'app-wizard-steps',
   templateUrl: './wizard-steps.component.html',
   styleUrls: ['./wizard-steps.component.scss']
 })

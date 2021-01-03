@@ -11,7 +11,7 @@ import { MapDetailDetermintator } from '../services/determinators/map-detail.det
 import { AdvancedLayout, PlainGalleryConfig, PlainGalleryStrategy, Image, ButtonsConfig, ButtonsStrategy, KS_DEFAULT_BTN_FULL_SCREEN, KS_DEFAULT_BTN_DOWNLOAD, KS_DEFAULT_BTN_CLOSE, ButtonEvent } from '@ks89/angular-modal-gallery';
 
 @Component({
-  selector: 'poke-map-overview',
+  selector: 'app-map-overview',
   templateUrl: './map-overview.component.html',
   styleUrls: ['./map-overview.component.scss']
 })

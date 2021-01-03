@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'poke-wizard-nav-bar',
+  selector: 'app-wizard-nav-bar',
   templateUrl: './wizard-nav-bar.component.html',
   styleUrls: ['./wizard-nav-bar.component.scss'],
   encapsulation: ViewEncapsulation.None

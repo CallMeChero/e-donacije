@@ -11,7 +11,7 @@ import { RequestIdDeterminator } from '../services/determinators/request-id.dete
 const URL = 'https://edonacijeapi.azurewebsites.net//DonationRequestImage/uploadImage/';
 
 @Component({
-  selector: 'poke-upload-input',
+  selector: 'app-upload-input',
   templateUrl: './upload-input.component.html',
   styleUrls: ['./upload-input.component.scss']
 })

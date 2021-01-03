@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MapDetailDetermintator } from '../services/determinators/map-detail.determinator';
 
 @Component({
-  selector: 'poke-modal-map-detail',
+  selector: 'app-modal-map-detail',
   templateUrl: './modal-map-detail.component.html',
   styleUrls: ['./modal-map-detail.component.scss']
 })

@@ -12,7 +12,7 @@ import { CRO_COLUMS, ENG_COLUMNS } from '../models/consts/datatable-column';
 import * as L from 'leaflet';
 
 @Component({
-  selector: 'poke-dashboard-overview',
+  selector: 'app-dashboard-overview',
   templateUrl: './dashboard-overview.component.html',
   styleUrls: ['./dashboard-overview.component.scss']
 })

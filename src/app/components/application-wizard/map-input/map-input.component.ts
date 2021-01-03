@@ -10,7 +10,7 @@ import { ApplicationWizardService } from '../services/application-wizard.service
 import { LatitudeLongitudeDeterminator  } from '../services/determinators/latitute-longitude.determinator';
 
 @Component({
-  selector: 'poke-map-input',
+  selector: 'app-map-input',
   templateUrl: './map-input.component.html',
   styleUrls: ['./map-input.component.scss']
 })
