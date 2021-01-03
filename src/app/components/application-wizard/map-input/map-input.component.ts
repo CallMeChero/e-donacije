@@ -97,17 +97,14 @@ export class MapInputComponent implements OnInit {
       }
       if(!this.elementClicked) {
         this.elementClicked = true;
-        this._spinner.show();
         this._applicationWizardService.sendLocation(values).pipe(take(1)).subscribe(
           data => {
-            this._spinner.hide();
             this.elementClicked = true;
             let element:HTMLElement = document.getElementById('auto_trigger') as HTMLElement;
             element.click();
             this._latitudeLongitudeDeterminator.changeSelectedRow(values);
           },
           error => {
-            this._spinner.hide();
             this._router.navigate(['naslovna']);
             const title = this._translateService.currentLang == 'hr' ? "Pogreška" : "Error";
             const msg = this._translateService.currentLang == 'hr' ? "Kontaktirajte administratora" : "Contact administrator";
