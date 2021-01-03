@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalMapDetailComponent } from '../modal-map-detail/modal-map-detail.component';
 import { MapDetailDetermintator } from '../services/determinators/map-detail.determinator';
+import { AdvancedLayout, PlainGalleryConfig, PlainGalleryStrategy, Image, ButtonsConfig, ButtonsStrategy, KS_DEFAULT_BTN_FULL_SCREEN, KS_DEFAULT_BTN_DOWNLOAD, KS_DEFAULT_BTN_CLOSE, ButtonEvent } from '@ks89/angular-modal-gallery';
 
 @Component({
   selector: 'poke-map-overview',
@@ -66,6 +67,17 @@ export class MapOverviewComponent {
     this.mapDetailDeterminator.person.subscribe(
       data => {
         this.activePerson = data;
+        this.activePerson?.images.forEach((image, index) => {
+          this.imagesRect.push(
+            new Image( index,
+              {
+                img: image,
+                description: 'Image Caption ' + index
+              }, {
+                img: image,
+              })
+          )
+        })
       }
     )
   }
@@ -80,7 +92,6 @@ export class MapOverviewComponent {
         response.forEach(coordination => {
           L.marker(L.latLng(+coordination.latitude, +coordination.longitude), this.markerIcon)
           .addTo(this.map).on("click", (e) => {
-            console.log(e)
             this.getLocationDetail(e);
             this.map.setView(e.target.getLatLng(),this.map.getZoom());
           });
@@ -112,7 +123,7 @@ export class MapOverviewComponent {
   }
 
   openModal(item) {
-    this.modalService.open(ModalMapDetailComponent, { size: 'xl' });
+    // this.modalService.open(ModalMapDetailComponent, { size: 'xl' });
   }
 
   popupTemplate(response) {
@@ -126,6 +137,42 @@ export class MapOverviewComponent {
       <li class="list-group-item"><strong>${this.activeLang == 'hr' ? 'Kontakt Broj' : 'Contact Number'}:</strong>${response.contactNumber}</li>
       <li class="list-group-item"><strong>${this.activeLang == 'hr' ? 'Kontakt Broj 2' : 'Contact Number'}:</strong>${response.secondContactNumber}</li>
     </ul>`
+  }
+  /* #endregion */
+
+  /* #region  Gallery */
+  customPlainGalleryRowDescConfig: PlainGalleryConfig = {
+    strategy: PlainGalleryStrategy.CUSTOM,
+    layout: new AdvancedLayout(-1, true)
+  };
+
+  imagesRect: Image[] = [];
+
+  buttonsConfigCustom: ButtonsConfig = {
+    visible: true,
+    strategy: ButtonsStrategy.CUSTOM,
+    buttons: [
+      KS_DEFAULT_BTN_FULL_SCREEN,
+      KS_DEFAULT_BTN_DOWNLOAD,
+      KS_DEFAULT_BTN_CLOSE
+    ]
+  };
+
+  onButtonBeforeHook(event: ButtonEvent) {
+    if (!event || !event.button) {
+      return;
+    }
+  }
+
+  onButtonAfterHook(event: ButtonEvent) {
+    if (!event || !event.button) {
+      return;
+    }
+  }
+
+  openImageModalRowDescription() {
+    const index: number = 0;
+    this.customPlainGalleryRowDescConfig = Object.assign({}, this.customPlainGalleryRowDescConfig, { layout: new AdvancedLayout(index, true) });
   }
   /* #endregion */
 

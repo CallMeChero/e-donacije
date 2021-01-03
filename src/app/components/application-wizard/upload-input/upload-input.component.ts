@@ -4,10 +4,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { FileLikeObject, FileUploader, FileUploaderOptions } from 'ng2-file-upload';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { ApplicationWizardService } from '../services/application-wizard.service';
 import { RequestIdDeterminator } from '../services/determinators/request-id.determinator';
 
 // const URL = '/api/';
-const URL = 'https://edonacijeapi.azurewebsites.net/DonationRequest/uploadImage/';
+const URL = 'https://edonacijeapi.azurewebsites.net//DonationRequestImage/uploadImage/';
 
 @Component({
   selector: 'poke-upload-input',
@@ -31,7 +32,8 @@ export class UploadInputComponent implements OnInit {
     private _notificationService: NotificationService,
     private _requestIdDeterminator: RequestIdDeterminator,
     private _router: Router,
-    private _ngxSpinner: NgxSpinnerService
+    private _ngxSpinner: NgxSpinnerService,
+    private _applicationWizardService: ApplicationWizardService
   ) {
     this.activeLang = _translateService.currentLang;
   }
@@ -57,7 +59,17 @@ export class UploadInputComponent implements OnInit {
     );
   }
 
+  removeFile(file) {
+    if(file.isUploading || file.isSuccess) {
+      return false;
+    } else {
+      this._applicationWizardService.removeFile(file.id);
+      file.remove()
+    }
+  }
+
   onSuccessItem(item, response, status, headers) {
+    item.id = response;
     this.fileCount = this.fileCount + 1;
     if(this.fileCount >= 2) {
       this._ngxSpinner.show();

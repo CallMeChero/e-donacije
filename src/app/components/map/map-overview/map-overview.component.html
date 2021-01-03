@@ -22,6 +22,10 @@
         </div>
       </div>
     </div>
-    <button style="display:none;" id="auto_trigger" (click)="openModal()"></button>
+    <button style="display:none;" id="auto_trigger" (click)="openImageModalRowDescription()"></button>
   </div>
 </div>
+<ks-modal-gallery [id]="0" [modalImages]="imagesRect" [plainGalleryConfig]="customPlainGalleryRowDescConfig"
+  [currentImageConfig]="{downloadable: true}" [buttonsConfig]="buttonsConfigCustom"
+  (buttonBeforeHook)="onButtonBeforeHook($event)" (buttonAfterHook)="onButtonAfterHook($event)">
+</ks-modal-gallery>

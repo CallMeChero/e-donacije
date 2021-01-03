@@ -40,7 +40,7 @@
                         [disabled]="item.isReady || item.isUploading || item.isSuccess">
                         <span class="fa fa-upload"></span> {{ 'Upload' | translate}}
                       </button>
-                      <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+                      <button type="button" class="btn btn-danger btn-xs" (click)="removeFile(item)">
                         <span class="fa fa-trash"></span> {{ 'Remove' | translate}}
                       </button>
                     </td>

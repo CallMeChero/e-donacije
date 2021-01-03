@@ -42,19 +42,19 @@ export class ModalMapDetailComponent implements OnInit {
     this._mapDetailDeterminator.person.subscribe(
       data => {
         this.person = data;
-        this.person.images.forEach((image, index) => {
-          this.imagesRect.push(
-            new Image( index,
-              {
-                img: image,
-                description: 'Image Caption ' + index
-              }, {
-                img: image,
-              })
-          )
-        })
-        console.log(this.person)
-        console.log('osoba',this.imagesRect)
+        if(this.person.images) {
+          this.person.images.forEach((image, index) => {
+            this.imagesRect.push(
+              new Image( index,
+                {
+                  img: image,
+                  description: 'Image Caption ' + index
+                }, {
+                  img: image,
+                })
+            )
+          })
+        }
       }
     )
   }

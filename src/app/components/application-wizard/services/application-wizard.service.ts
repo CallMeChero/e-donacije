@@ -64,6 +64,17 @@ export class ApplicationWizardService {
       );
   }
 
+  // Send marker lang & lat
+  removeFile(id: string): Observable<any> {
+    const url = this._urlHelper.getUrl('DonationRequestImage/deleteImage', id);
+    return this._http
+      .delete<any>(url)
+      .pipe(
+        tap((data) => console.log('Post map step', data)),
+        catchError(this.handleError)
+      );
+  }
+
   // Remove before production
   private handleError(err: HttpErrorResponse): Observable<never> {
     const { error } = err;
