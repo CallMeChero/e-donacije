@@ -26,11 +26,11 @@ export class ContactUsService {
   /* #region  Methods */
 
   // Post contact form
-  sendContactForm(formValues: IContactForm): Observable<number> {
+  sendContactForm(formValues: IContactForm): Observable<any> {
     const url = this._urlHelper.getUrl(this.CONTACT_CONTROLLER);
     const request = {...formValues}
     return this._http
-      .post<number>(url, request)
+      .post<any>(url, request)
       .pipe(
         tap((data) => console.log('Post contact form', data)),
         catchError(this.handleError)
