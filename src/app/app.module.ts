@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
+  // ako ovo ne radi onda samo makni da ostane ./i18n/
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
