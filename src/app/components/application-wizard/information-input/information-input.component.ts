@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
+import { IApplicationMap } from '../models/request/application-map';
 import { ApplicationWizardService } from '../services/application-wizard.service';
+import { LatitudeLongitudeDeterminator } from '../services/determinators/latitute-longitude.determinator';
 
 @Component({
   selector: 'poke-information-input',
@@ -12,11 +14,13 @@ export class InformationInputComponent implements OnInit {
 
   /* #region  Variables*/
   informationGroup: FormGroup;
+  latAndLang: IApplicationMap;
   /* #endregion */
 
   /* #region  Constructor */
   constructor(
     private readonly _applicationWizardService: ApplicationWizardService,
+    private _latitudeLongitudeDeterminator: LatitudeLongitudeDeterminator,
     private _fb: FormBuilder
   ) { }
   /* #endregion */
@@ -24,6 +28,11 @@ export class InformationInputComponent implements OnInit {
   /* #region  Methods */
   ngOnInit(): void {
     this.setUpFormGroup();
+    this._latitudeLongitudeDeterminator.latAndLang.subscribe(
+      data => {
+        this.latAndLang = data;
+      }
+    )
   }
 
   setUpFormGroup() {
@@ -41,17 +50,17 @@ export class InformationInputComponent implements OnInit {
     });
   }
 
-  save() {
+  saveInfoStep() {
     if(this.informationGroup.invalid) {
       return
     } else {
       console.log(this.informationGroup.value)
       if(this.informationGroup.dirty) {
-        // this._applicationWizardService.sendAddress(this.informationGroup.value).pipe(take(1)).subscribe(
-        //   data => {
-
-        //   }
-        // )
+        this._applicationWizardService.sendInformationStep(this.informationGroup.value, this.latAndLang).pipe(take(1)).subscribe(
+          data => {
+            console.log('success')
+          }
+        )
       }
     }
   }

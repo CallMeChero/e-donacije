@@ -29,6 +29,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     FormsModule,
     ReactiveFormsModule,
     FileUploadModule,
+    // GuidedTourModule,
     LeafletModule.forRoot(),
     RouterModule.forChild([
       {
@@ -59,5 +60,8 @@ import { FileUploadModule } from 'ng2-file-upload';
       }
     ])
   ],
+  // providers: [
+  //   GuidedTourService
+  // ]
 })
 export class ApplicationWizardModule { }

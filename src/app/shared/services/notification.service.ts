@@ -9,10 +9,10 @@ export class NotificationService {
  constructor() { }
  /* #endregion */
 
- fireErrorNotification(message: string): void {
+ fireErrorNotification(title: string,message: string): void {
   Swal.fire({
     icon: 'error',
-    title: 'Upsss...',
+    title: title,
     text: message,
     customClass: {
       confirmButton: "d-flex btn-primary"
@@ -29,10 +29,10 @@ export class NotificationService {
   })
  }
 
- fireSuccessMessage(message: string): void {
+ fireSuccessMessage(title: string,message: string): void {
   Swal.fire({
     icon: 'success',
-    title: 'Uspjeh',
+    title: title,
     text: message,
     showConfirmButton: true,
     customClass: {
@@ -50,10 +50,10 @@ export class NotificationService {
   });
  }
 
- fireWarningMessage(message: string) {
+ fireWarningMessage(title: string, message: string) {
     Swal.fire({
       icon: 'warning',
-      title: 'Pažnja',
+      title: title,
       text: message,
       customClass: {
       confirmButton: "d-flex btn-primary"

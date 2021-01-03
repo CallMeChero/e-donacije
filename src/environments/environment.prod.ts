@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseURL: 'https://pokeapi.co/api/v2'
+  baseURL: 'https://edonacijeapi.azurewebsites.net'
 };

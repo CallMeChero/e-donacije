@@ -1,18 +1,14 @@
 <div class="col-xl-12">
-  <div class="d-flex justify-content-between mb-3 align-items-center">
+  <div class="card-header d-flex justify-content-between align-items-center pr-0 pl-0">
     <h5>{{ 'Put marker on your location' | translate }}</h5>
-    <button class="btn btn-primary" title="Uredi" (click)="editLocation()" *ngIf="!isEdit; else editActive">
-      {{ 'Edit' | translate }}
+    <button class="btn btn-primary btn-next" (click)="saveMarker()" *ngIf="map && map.hasLayer(newMarker)">{{
+      'Next' | translate}}
     </button>
-    <ng-template #editActive>
-      <button class="btn btn-primary" title="Odustani" (click)="editLocation()">{{ 'Discard' | translate }}</button>
-    </ng-template>
   </div>
   <div class="card-body p-0 leaflet-custom">
     <div class="map-height" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
   </div>
-  <div class="d-flex justify-content-end mt-3">
-    <button class="btn btn-primary btn-next" (click)="saveStep()" awNextStep>{{ 'Next' | translate}}
-    </button>
-  </div>
+  <button style="display:none;" id="auto_trigger" awNextStep>{{
+    'Next' | translate}}
+  </button>
 </div>

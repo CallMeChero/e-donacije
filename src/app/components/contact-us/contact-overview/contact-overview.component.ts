@@ -35,7 +35,7 @@ export class ContactOverviewComponent implements OnInit {
     this.contactGroup = this._fb.group({
       name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
       email: ['', [Validators.required, Validators.email]],
-      message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]]
+      message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]]
     });
   }
 
@@ -46,10 +46,11 @@ export class ContactOverviewComponent implements OnInit {
       if(this.contactGroup.dirty) {
         this._contactUsService.sendContactForm(this.contactGroup.value).pipe(take(1)).subscribe(
           data => {
-            this._notificationService.fireSuccessMessage(this._translateService.currentLang == 'hr' ?
+            const title = this._translateService.currentLang == 'hr' ? "Uspjeh": "Success";
+            const message = this._translateService.currentLang == 'hr' ?
             "Forma je uspješno poslana, odgovoriti ćemo Vam u najbržem mogućem roku"
-            : "Form has been successfully sent. Expect reply as soon as possible"
-            );
+            : "Form has been successfully sent. Expect reply as soon as possible";
+            this._notificationService.fireSuccessMessage(title, message);
           }
         )
       }

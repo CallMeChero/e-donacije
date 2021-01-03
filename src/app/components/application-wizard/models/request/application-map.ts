@@ -1,4 +1,4 @@
 export interface IApplicationMap {
-  lat: string;
-  lng: string;
+  longitude: string;
+  latitude: string;
 }

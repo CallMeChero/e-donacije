@@ -15,7 +15,7 @@ import { IApplicationMap } from '../models/request/application-map';
 })
 export class ApplicationWizardService {
   /* #region  Variables */
-  private readonly TICKER_CONTROLLER = 'contact';
+  private readonly TICKER_CONTROLLER = 'DonationRequest';
   /* #endregion */
 
   /* #region  Constructor */
@@ -28,9 +28,22 @@ export class ApplicationWizardService {
   /* #region  Methods */
 
   // Post contact form
-  sendAddress(formValues: IApplicationAddress): Observable<any> {
-    const url = this._urlHelper.getUrl(this.TICKER_CONTROLLER);
-    const request = {...formValues}
+  sendInformationStep(formValues, latAndLang: IApplicationMap): Observable<any> {
+    const url = this._urlHelper.getUrl(this.TICKER_CONTROLLER, 'addNewDonationRequest');
+    const request = {
+      latitude: latAndLang.latitude,
+      longitude: latAndLang.longitude,
+      firstName: formValues.firstName,
+      lastName: formValues.lastName,
+      contactNumber: formValues.contactNumber,
+      secondContactNumber: formValues.secondContactNumber,
+      bankName: formValues.bankName,
+      iban: formValues.iban,
+      address: formValues.iban,
+      addressNumber: formValues.addressNumber,
+      postalCode: formValues.postalCode,
+      message: formValues.body
+    }
     return this._http
       .post<any>(url, request)
       .pipe(
@@ -41,7 +54,7 @@ export class ApplicationWizardService {
 
   // Send marker lang & lat
   sendLocation(values): Observable<any> {
-    const url = this._urlHelper.getUrl(this.TICKER_CONTROLLER);
+    const url = this._urlHelper.getUrl(this.TICKER_CONTROLLER, 'isValidLocation');
     const request: IApplicationMap = {...values};
     return this._http
       .post<any>(url, request)

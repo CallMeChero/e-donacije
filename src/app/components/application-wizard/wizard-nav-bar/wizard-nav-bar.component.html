@@ -9,8 +9,8 @@
               <poke-address-input></poke-address-input>
             </aw-wizard-step> -->
             <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf041;', fontFamily: 'FontAwesome' }"
-              [stepTitle]="isCroatianLanguageActive ?  'Mapa' : 'Map'" (stepEnter)="enterSecondStep($event)">
-              <poke-map-input [stepInitialized]="secondStepInitialized"></poke-map-input>
+              [stepTitle]="isCroatianLanguageActive ?  'Mapa' : 'Map'">
+              <poke-map-input></poke-map-input>
             </aw-wizard-step>
             <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf09d;', fontFamily: 'FontAwesome' }"
               [stepTitle]="isCroatianLanguageActive ? 'Opće Informacije': 'General Information'">

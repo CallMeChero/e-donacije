@@ -46,36 +46,38 @@ export class UploadInputComponent implements OnInit {
     console.log(response)
   }
   onWhenAddingFileFailed(item: FileLikeObject, filter: any, options: any): void {
+    const title = this.activeLang !== 'hr' ? "Greška": "Error";
     switch (filter.name) {
       case 'queueLimit':
         const queueLimitMsg = this.activeLang !== 'hr' ?
         "Maximum number of files for upload is set to 3.":
         "Maksimalni broj datoteka je 3."
-        this._notificationService.fireErrorNotification(queueLimitMsg);
+        this._notificationService.fireErrorNotification(title,queueLimitMsg);
         break;
       case 'fileSize':
         const msg = this.activeLang !== 'hr' ?
         `Maximum upload size exceeded (${item.size} of ${this.maxFileSize} allowed)`:
         `Datatoteka je premašila maksimalnu veličinu (${item.size} od dopuštenih ${this.maxFileSize})`
-        this._notificationService.fireErrorNotification(msg);
+        this._notificationService.fireErrorNotification(title,msg);
         break;
       case 'mimeType':
         const allowedTypes = this.allowedMimeTypes.join(', ');
         const message = this.activeLang !== 'hr' ?
         `Type "${item.type}" is not allowed. Allowed types: "${allowedTypes}"`:
         `Tip datoteke "${item.type}" nije dopušten. Moguće je poslati: ${allowedTypes} tipove datoteka`
-        this._notificationService.fireErrorNotification(message);
+        this._notificationService.fireErrorNotification(title,message);
         break;
       default:
         const errorMsg = this.activeLang == 'hr' ?
         "Dogodila se nepoznata greška. Kontaktirajte administratora":
         "Unknown error occured. Contact administrator"
-        this._notificationService.fireErrorNotification(errorMsg);
+        this._notificationService.fireErrorNotification(title,errorMsg);
     }
   }
 
   finishWithWizard(): void {
-    this._notificationService.fireSuccessMessage(
+    const title = this.activeLang !== 'hr' ? "Uspjeh": "Success";
+    this._notificationService.fireSuccessMessage(title,
       this.activeLang == 'hr' ? "Zahtjev je uspješno kreiran.":
       "Entry is successfully submitted."
       )

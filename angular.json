@@ -49,6 +49,7 @@
               "@tweenjs/tween.js",
               "photoswipe",
               "photoswipe/dist/photoswipe-ui-default",
+              "ngx-guided-tour"
             ],
             "outputPath": "dist/e-donacije",
             "index": "src/index.html",

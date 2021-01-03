@@ -23,9 +23,4 @@ export class WizardNavBarComponent implements OnInit {
       this.isCroatianLanguageActive = response?.lang == 'hr' ? true : false;
     });
   }
-
-  enterSecondStep(event) {
-    this.secondStepInitialized = true;
-  }
-
 }

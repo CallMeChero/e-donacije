@@ -114,7 +114,6 @@ export class DashboardOverviewComponent implements OnInit {
     )
     // this._dashboardService.getSummary().pipe(
     //   take(1),
-    //   catchError((err) => this.catchAndReplaceError(err)),
     //   map(res => res.response.data)
     //   ).subscribe(
     //   (response: ISummary) => {
@@ -141,12 +140,6 @@ export class DashboardOverviewComponent implements OnInit {
         })},100)
       }
     });
-  }
-
-  // Error handling
-  catchAndReplaceError(errorMessage: string): Observable<never> {
-    this.__notificationService.fireErrorNotification(errorMessage);
-    return EMPTY;
   }
 
   onMapReady(map: L.Map): void {

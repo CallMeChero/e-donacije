@@ -1,26 +1,25 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import * as L from 'leaflet';
 import { take } from 'rxjs/operators';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { IApplicationMap } from '../models/request/application-map';
 import { ApplicationWizardService } from '../services/application-wizard.service';
+import { LatitudeLongitudeDeterminator  } from '../services/determinators/latitute-longitude.determinator';
 
 @Component({
   selector: 'poke-map-input',
   templateUrl: './map-input.component.html',
   styleUrls: ['./map-input.component.scss']
 })
-export class MapInputComponent implements OnInit, OnChanges{
+export class MapInputComponent implements OnInit {
 
   /* #region  Variables */
-
+  isMarkerActive: boolean = false;
+  elementClicked: boolean = false;
   // CRO SouthWest & SouthEast bounds
-  address: string = 'Ivane Brlić Mažuranić';
-  initialLatAndLang = L.latLng(45.3770786, 16.3204046);
-  isEdit: boolean = false;
-  initialMarker: L.Marker;
   newMarker: L.Marker;
   @Input() stepInitialized: boolean;
-
   maxBounds = L.latLngBounds(
     L.latLng(42.35295, 13.518828),
     L.latLng(46.55597, 19.40382)
@@ -52,44 +51,22 @@ export class MapInputComponent implements OnInit, OnChanges{
 
 
   constructor(
-    private _applicationWizardService: ApplicationWizardService
+    private _applicationWizardService: ApplicationWizardService,
+    private _notificationService: NotificationService,
+    private _translateService: TranslateService,
+    private _ref: ChangeDetectorRef,
+    private _latitudeLongitudeDeterminator: LatitudeLongitudeDeterminator
   ) { }
 
   ngOnInit(): void {}
-
-  ngOnChanges(event): void {
-    if(event && event.stepInitialized.currentValue === true) {
-      // bez ovog se kontejner nece resizati za mapu jer imamo wizard...tugy plaky
-      setTimeout(() => {
-        this.map.invalidateSize();
-      },50);
-    }
-  }
-
-  editLocation(): void {
-    this.isEdit = !this.isEdit;
-    if(!this.map.hasLayer(this.initialMarker) && this.newMarker && this.map.hasLayer(this.newMarker)) {
-      this.map.removeLayer(this.newMarker);
-      this.initMarkers();
-    }
-  }
-
-  initMarkers(): void {
-    // lat i lang response
-    const popupInfo = `<b>${ this.address }</b>`;
-    this.initialMarker = L.marker(this.initialLatAndLang, this.markerIcon)
-      .addTo(this.map)
-      .bindPopup(popupInfo);
-  }
 
   onMapReady(map: L.Map): void {
     map.setMaxBounds(this.maxBounds);
     map.setMaxZoom(18);
     map.setMinZoom(8);
     this.map = map;
-    this.initMarkers();
     this.map.on("click", (event:any) => {
-      if(event.latlng && this.isEdit) {
+      if(event.latlng) {
         this.map.eachLayer(
           item => {
             if (item instanceof L.Marker){
@@ -97,21 +74,41 @@ export class MapInputComponent implements OnInit, OnChanges{
             }
           }
         )
-        setTimeout(() => { this.newMarker = L.marker(event.latlng, this.markerIcon).addTo(this.map)}, 50);
+        this.isMarkerActive = true;
+        setTimeout(() => {
+          this.newMarker = L.marker(event.latlng, this.markerIcon).addTo(this.map);
+          this._ref.detectChanges();
+        }, 50);
       }
     });
   }
 
-  saveStep(): void {
-    const activeMarker = this.map.hasLayer(this.initialMarker) ? this.initialMarker.getLatLng() : this.newMarker.getLatLng()
-    const values: IApplicationMap = {
-      lat: activeMarker.lat.toString(),
-      lng: activeMarker.lng.toString()
-    }
-    this._applicationWizardService.sendLocation(values).pipe(take(1)).subscribe(
-      data => {
-        console.log(data)
+  saveMarker(): void {
+    const isMarkerActive = this.map.hasLayer(this.newMarker);
+    if(isMarkerActive) {
+      const markerValues = this.newMarker.getLatLng();
+      const values: IApplicationMap = {
+        latitude: markerValues.lat.toString(),
+        longitude: markerValues.lng.toString()
       }
-    )
+        this._applicationWizardService.sendLocation(values).pipe(take(1)).subscribe(
+          data => {
+            if(!this.elementClicked) {
+                this.elementClicked = true;
+                let element:HTMLElement = document.getElementById('auto_trigger') as HTMLElement;
+                element.click();
+                this._latitudeLongitudeDeterminator.changeSelectedRow(values);
+            }
+          }
+        )
+    } else {
+      const title = this._translateService.currentLang == 'hr' ? "Pogreška" : "Error";
+      const msg = this._translateService.currentLang == 'hr' ? "Marker mora postojati na mapi" : "Marker must be on map";
+      this._notificationService.fireWarningMessage(title,msg);
+    }
+  }
+
+  saveStep(): void {
+
   }
 }
