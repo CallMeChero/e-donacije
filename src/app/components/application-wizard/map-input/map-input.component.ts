@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as L from 'leaflet';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs/operators';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { IApplicationMap } from '../models/request/application-map';
@@ -55,7 +57,9 @@ export class MapInputComponent implements OnInit {
     private _notificationService: NotificationService,
     private _translateService: TranslateService,
     private _ref: ChangeDetectorRef,
-    private _latitudeLongitudeDeterminator: LatitudeLongitudeDeterminator
+    private _latitudeLongitudeDeterminator: LatitudeLongitudeDeterminator,
+    private _router: Router,
+    private _spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {}
@@ -91,16 +95,26 @@ export class MapInputComponent implements OnInit {
         latitude: markerValues.lat.toString(),
         longitude: markerValues.lng.toString()
       }
+      if(!this.elementClicked) {
+        this.elementClicked = true;
+        this._spinner.show();
         this._applicationWizardService.sendLocation(values).pipe(take(1)).subscribe(
           data => {
-            if(!this.elementClicked) {
-                this.elementClicked = true;
-                let element:HTMLElement = document.getElementById('auto_trigger') as HTMLElement;
-                element.click();
-                this._latitudeLongitudeDeterminator.changeSelectedRow(values);
-            }
+            this._spinner.hide();
+            this.elementClicked = true;
+            let element:HTMLElement = document.getElementById('auto_trigger') as HTMLElement;
+            element.click();
+            this._latitudeLongitudeDeterminator.changeSelectedRow(values);
+          },
+          error => {
+            this._spinner.hide();
+            this._router.navigate(['naslovna']);
+            const title = this._translateService.currentLang == 'hr' ? "Pogreška" : "Error";
+            const msg = this._translateService.currentLang == 'hr' ? "Kontaktirajte administratora" : "Contact administrator";
+            this._notificationService.fireErrorNotification(title,msg);
           }
         )
+      }
     } else {
       const title = this._translateService.currentLang == 'hr' ? "Pogreška" : "Error";
       const msg = this._translateService.currentLang == 'hr' ? "Marker mora postojati na mapi" : "Marker must be on map";

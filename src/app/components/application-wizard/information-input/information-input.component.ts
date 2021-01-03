@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { take } from 'rxjs/operators';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { IApplicationMap } from '../models/request/application-map';
 import { ApplicationWizardService } from '../services/application-wizard.service';
 import { LatitudeLongitudeDeterminator } from '../services/determinators/latitute-longitude.determinator';
@@ -16,6 +19,7 @@ export class InformationInputComponent implements OnInit {
   /* #region  Variables*/
   informationGroup: FormGroup;
   latAndLang: IApplicationMap;
+  currentLang: string;
   /* #endregion */
 
   /* #region  Constructor */
@@ -23,8 +27,13 @@ export class InformationInputComponent implements OnInit {
     private readonly _applicationWizardService: ApplicationWizardService,
     private _latitudeLongitudeDeterminator: LatitudeLongitudeDeterminator,
     private _requestIdDeterminator: RequestIdDeterminator,
-    private _fb: FormBuilder
-  ) { }
+    private _fb: FormBuilder,
+    private _router: Router,
+    private _notificationService: NotificationService,
+    private _translateService: TranslateService
+  ) {
+    this.currentLang = _translateService.currentLang;
+  }
   /* #endregion */
 
   /* #region  Methods */
@@ -61,6 +70,12 @@ export class InformationInputComponent implements OnInit {
         this._applicationWizardService.sendInformationStep(this.informationGroup.value, this.latAndLang).pipe(take(1)).subscribe(
           data => {
             this._requestIdDeterminator.changeRequestId(data)
+          },
+          error => {
+            this._router.navigate(['donacija/prijava']);
+            const title = this.currentLang == 'hr' ? "Pogreška" : "Error";
+            const msg = this.currentLang == "hr" ? "Kontaktirajte administratora" : "Contact administrator";
+            this._notificationService.fireErrorNotification(title,msg);
           }
         )
       }

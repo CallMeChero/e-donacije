@@ -39,7 +39,7 @@ export class ApplicationWizardService {
       secondContactNumber: formValues.secondContactNumber,
       bankName: formValues.bankName,
       iban: formValues.iban,
-      address: formValues.iban,
+      address: formValues.address,
       addressNumber: formValues.addressNumber,
       postalCode: formValues.postalCode,
       message: formValues.body

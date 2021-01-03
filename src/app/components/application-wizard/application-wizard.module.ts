@@ -11,6 +11,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UploadInputComponent } from './upload-input/upload-input.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     FormsModule,
     ReactiveFormsModule,
     FileUploadModule,
+    NgbModule,
     // GuidedTourModule,
     LeafletModule.forRoot(),
     RouterModule.forChild([

@@ -4,7 +4,10 @@
       <div class="card-header">
         <h5>{{ 'Upload pictures' | translate}}</h5>
       </div>
-      <div class="card-body  upload-input">
+      <div class="card-body  upload-input">¸
+        <ngb-alert [type]="'primary'" [dismissible]="false">
+          {{ 'You can submit total of 2 pictures. Maximum size of each one is 5MB.' | translate}}
+        </ngb-alert>
         <div class="row">
           <div class="col-md-12 xl-40 upload-space-sm p-0">
             <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
@@ -24,12 +27,10 @@
                   <tr *ngFor="let item of uploader.queue">
                     <td><strong>{{ item?.file?.name }}</strong></td>
                     <td>
-                      <div class="progress mb-0">
+                      <div class="progress mb-0" *ngIf="!item.isUploaded">
                         <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }">
                         </div>
                       </div>
-                    </td>
-                    <td>
                       <span *ngIf="item.isSuccess"><i style="color: green;" class="fa fa-check-square-o"></i></span>
                       <span *ngIf="item.isError"><i style="color: crimson;" class="fa fa-trash"></i></span>
                     </td>
