@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { FileLikeObject, FileUploader } from 'ng2-file-upload';
+import { FileLikeObject, FileUploader, FileUploaderOptions } from 'ng2-file-upload';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { RequestIdDeterminator } from '../services/determinators/request-id.determinator';
 
@@ -44,6 +44,9 @@ export class UploadInputComponent implements OnInit {
         });
         this.uploader.onWhenAddingFileFailed = (item, filter, options) => this.onWhenAddingFileFailed(item, filter, options);
         this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
+        this.uploader.onBeforeUploadItem = (item) => {
+          item.withCredentials = false;
+        }
       }
     );
   }

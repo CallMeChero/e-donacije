@@ -119,8 +119,17 @@
             class="text-danger">*</span></label>
         <input type="text" formControlName="addressNumber" class="form-control" placeholder="npr. 2a"
           [ngClass]="{'is-invalid': addressNumber.invalid && (addressNumber.dirty || addressNumber.touched)}">
-        <div class="invalid-feedback">
+        <div class="invalid-feedback"
+          *ngIf="addressNumber.invalid && addressNumber.errors?.required && (addressNumber.dirty || addressNumber.touched)">
           {{ 'Address Number is required' | translate}}.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="addressNumber.invalid && addressNumber.errors?.minlength && (addressNumber.dirty || addressNumber.touched)">
+          {{ 'Address Number must contain atleast 1 character' | translate}}.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="addressNumber.invalid && addressNumber.errors?.maxlength && (addressNumber.dirty || addressNumber.touched)">
+          {{ 'Address Number must have less than 10 characters' | translate}}.
         </div>
       </div>
     </div>

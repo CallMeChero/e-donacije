@@ -59,6 +59,8 @@
   "Address must have less than 40 characters": "Address must have less than 40 characters",
   "Address Number": "Address Number",
   "Address Number is required": "Address Number is required",
+  "Address Number must contain atleast 1 character": "Address Number must contain atleast 1 character",
+  "Address Number must have less than 10 characters": "Address Number must have less than 10 characters",
   "Postal Code": "Postal Code",
   "Postal Code is required": "Postal Code is required",
   "Postal Code has 5 characters": "Postal Code has 5 characters",

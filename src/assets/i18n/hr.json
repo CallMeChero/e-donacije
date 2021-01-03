@@ -92,6 +92,8 @@
   "Address must have less than 40 characters": "Adresa mora sadržavati manje od 40 znakova",
   "Address Number": "Kućni Broj",
   "Address Number is required": "Kućni Broj je obavezan",
+  "Address Number must contain atleast 1 character": "Kućni Broj mora sadržavati minimalno 1 znak",
+  "Address Number must have less than 10 characters": "Kućni Broj mora sadržavati maksimalno 10 znakova",
   "Postal Code": "Poštanski Broj",
   "Postal Code is required": "Poštanski Broj je obavezan",
   "Postal Code has 5 characters": "Poštanski Broj mora sadržavati 5 znakova",
