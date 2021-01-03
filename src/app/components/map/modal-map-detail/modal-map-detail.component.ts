@@ -45,19 +45,28 @@ export class ModalMapDetailComponent implements OnInit {
         this.person.images.forEach((image, index) => {
           this.imagesRect.push(
             new Image( index,
-              { // modal
-                img: image.url,
+              {
+                img: image,
                 description: 'Image Caption ' + index
               }, {
-                img: image.url,
+                img: image,
               })
           )
         })
         console.log(this.person)
-        console.log('osoba',this.person)
+        console.log('osoba',this.imagesRect)
       }
     )
   }
+
+  openImageModalRowDescription(image: Image) {
+    const index: number = this.getCurrentIndexCustomLayout(image, this.imagesRect);
+    this.customPlainGalleryRowDescConfig = Object.assign({}, this.customPlainGalleryRowDescConfig, { layout: new AdvancedLayout(index, true) });
+  }
+
+  private getCurrentIndexCustomLayout(image: Image, images: Image[]): number {
+    return image ? images.indexOf(image) : -1;
+  };
 
   onButtonBeforeHook(event: ButtonEvent) {
     if (!event || !event.button) {

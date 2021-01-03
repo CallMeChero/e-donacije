@@ -91,7 +91,15 @@
         <div *ngIf="!imagesRect">
           <h5>{{ 'Person didnt submit images' | translate }}</h5>
         </div>
-        <ks-modal-gallery [id]="2" [modalImages]="imagesRect" [plainGalleryConfig]="customPlainGalleryRowDescConfig"
+        <ng-container *ngFor="let img of imagesRect">
+          <figure class="col-sm-3">
+            <div class="img-hover hover-1">
+              <img [src]="img.modal.img" (click)="openImageModalRowDescription(img)" />
+            </div>
+          </figure>
+        </ng-container>
+
+        <ks-modal-gallery [id]="0" [modalImages]="imagesRect" [plainGalleryConfig]="customPlainGalleryRowDescConfig"
           [currentImageConfig]="{downloadable: true}" [buttonsConfig]="buttonsConfigCustom"
           (buttonBeforeHook)="onButtonBeforeHook($event)" (buttonAfterHook)="onButtonAfterHook($event)">
         </ks-modal-gallery>
