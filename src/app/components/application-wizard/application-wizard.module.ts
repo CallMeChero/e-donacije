@@ -32,16 +32,16 @@ import { FileUploadModule } from 'ng2-file-upload';
     LeafletModule.forRoot(),
     RouterModule.forChild([
       {
-        path: 'zadnji-korak',
+        path: 'treci-korak',
         component: InformationInputComponent,
       },
       {
         path: 'drugi-korak',
-        component: MapInputComponent,
+        component: InformationInputComponent,
       },
       {
         path: 'prvi-korak',
-        component: AddressInputComponent,
+        component: MapInputComponent,
       },
       {
         path: 'prijava',
