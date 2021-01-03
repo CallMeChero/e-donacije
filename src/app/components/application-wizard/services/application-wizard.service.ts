@@ -15,7 +15,7 @@ import { IApplicationMap } from '../models/request/application-map';
 })
 export class ApplicationWizardService {
   /* #region  Variables */
-  private readonly TICKER_CONTROLLER = 'DonationRequest';
+  private readonly DONATION_CONTROLLER = 'DonationRequest';
   /* #endregion */
 
   /* #region  Constructor */
@@ -29,7 +29,7 @@ export class ApplicationWizardService {
 
   // Post contact form
   sendInformationStep(formValues, latAndLang: IApplicationMap): Observable<any> {
-    const url = this._urlHelper.getUrl(this.TICKER_CONTROLLER, 'addNewDonationRequest');
+    const url = this._urlHelper.getUrl(this.DONATION_CONTROLLER, 'addNewDonationRequest');
     const request = {
       latitude: latAndLang.latitude,
       longitude: latAndLang.longitude,
@@ -54,7 +54,7 @@ export class ApplicationWizardService {
 
   // Send marker lang & lat
   sendLocation(values): Observable<any> {
-    const url = this._urlHelper.getUrl(this.TICKER_CONTROLLER, 'isValidLocation');
+    const url = this._urlHelper.getUrl(this.DONATION_CONTROLLER, 'isValidLocation');
     const request: IApplicationMap = {...values};
     return this._http
       .post<any>(url, request)

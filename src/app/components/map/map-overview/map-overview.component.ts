@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { HttpClient } from "@angular/common/http";
+import { MapService } from '../services/map.service';
+import { take } from 'rxjs/operators';
+import { IMapLatitudeLongitude } from '../models/response/map-latitude-longitude';
 
 @Component({
   selector: 'poke-map-overview',
   templateUrl: './map-overview.component.html',
   styleUrls: ['./map-overview.component.scss']
 })
-export class MapOverviewComponent implements OnInit {
+export class MapOverviewComponent {
 
   /* #region  Variables */
 
   // CRO SouthWest & SouthEast bounds
+  allLocations: IMapLatitudeLongitude[] = [];
   maxBounds = L.latLngBounds(
     L.latLng(42.35295, 13.518828),
     L.latLng(46.55597, 19.40382)
@@ -42,20 +46,33 @@ export class MapOverviewComponent implements OnInit {
   /* #endregion */
 
   /* #region  Constructor */
-  constructor(private http: HttpClient) { }
+  constructor(
+    private _mapService: MapService
+  ) { }
   /* #endregion */
 
   /* #region  Methods */
-  ngOnInit(): void {
+
+  mapAllLocations() {
+    this._mapService.getAllLocations().pipe(take(1)).subscribe(
+      response => {
+        response.forEach(coordination => {
+          console.log(L.latLng(+coordination.latitude, +coordination.longitude))
+          L.marker(L.latLng(+coordination.latitude, +coordination.longitude), this.markerIcon).addTo(this.map);
+        })
+      }
+    )
   }
 
   onMapReady(map: L.Map): void {
     // this.http.get("assets/data/polygon.json").subscribe((json: any) => {
     //   this.json = json;
     // L.geoJSON(this.json).addTo(map);
+    this.map = map;
     map.setMaxBounds(this.maxBounds);
     map.setMaxZoom(18);
     map.setMinZoom(8);
+    this.mapAllLocations();
     // });
   }
   /* #endregion */
