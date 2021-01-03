@@ -131,5 +131,8 @@
   "Upload": "Pošalji",
   "Queue progress": "Stanje slanja",
   "Upload all": "Pošalji sve",
-  "Remove all": "Makni sve"
+  "Remove all": "Makni sve",
+  "You can submit total of 2 pictures": "Možete staviti ukupno 2 slike. Maksimalna veličina svake je 5MB.",
+  "You must have atleast 1 picture for entry to be valid": "Morate imati barem 1 sliku kako bi zahtjev bio važeći",
+  "Finish": "Završi"
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FileLikeObject, FileUploader, FileUploaderOptions } from 'ng2-file-upload';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { RequestIdDeterminator } from '../services/determinators/request-id.determinator';
 
@@ -14,24 +16,28 @@ const URL = 'https://edonacijeapi.azurewebsites.net/DonationRequest/uploadImage/
 })
 export class UploadInputComponent implements OnInit {
 
+  /* #region  Variables */
   maxFileSize:number  = 5 * 1024 * 1024; // modify this to your desired max file size
   uploader: FileUploader;
   activeLang: string;
   allowedMimeTypes: string[] = ['image/png', 'image/jpg', 'image/jpeg'];
   hasBaseDropZoneOver: boolean = false;
+  fileCount: number = 0;
+  /* #endregion */
 
-  fileOverBase(e: any): void {
-    this.hasBaseDropZoneOver = e;
-  }
-
+  /* #region  Constructor */
   constructor(
     private _translateService: TranslateService,
     private _notificationService: NotificationService,
-    private _requestIdDeterminator: RequestIdDeterminator
+    private _requestIdDeterminator: RequestIdDeterminator,
+    private _router: Router,
+    private _ngxSpinner: NgxSpinnerService
   ) {
     this.activeLang = _translateService.currentLang;
-   }
+  }
+  /* #endregion */
 
+  /* #region  Methods */
   ngOnInit(): void {
     this._requestIdDeterminator.requestId.subscribe(
       data => {
@@ -52,7 +58,14 @@ export class UploadInputComponent implements OnInit {
   }
 
   onSuccessItem(item, response, status, headers) {
-    console.log(response)
+    this.fileCount = this.fileCount + 1;
+    if(this.fileCount >= 2) {
+      this._ngxSpinner.show();
+      setTimeout(() => {
+        this._ngxSpinner.hide()
+        this.finishWithWizard();
+      },500)
+    }
   }
 
   onWhenAddingFileFailed(item: FileLikeObject, filter: any, options: any): void {
@@ -90,6 +103,8 @@ export class UploadInputComponent implements OnInit {
     this._notificationService.fireSuccessMessage(title,
       this.activeLang == 'hr' ? "Zahtjev je uspješno kreiran.":
       "Entry is successfully submitted."
-      )
+    );
+    this._router.navigate(['mapa/pregled']);
   }
+  /* #endregion */
 }

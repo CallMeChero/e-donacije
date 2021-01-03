@@ -72,7 +72,7 @@ export class InformationInputComponent implements OnInit {
             this._requestIdDeterminator.changeRequestId(data)
           },
           error => {
-            this._router.navigate(['donacija/prijava']);
+            this._router.navigate(['naslovna']);
             const title = this.currentLang == 'hr' ? "Pogreška" : "Error";
             const msg = this.currentLang == "hr" ? "Kontaktirajte administratora" : "Contact administrator";
             this._notificationService.fireErrorNotification(title,msg);

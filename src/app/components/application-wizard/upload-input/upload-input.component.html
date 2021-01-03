@@ -4,15 +4,16 @@
       <div class="card-header">
         <h5>{{ 'Upload pictures' | translate}}</h5>
       </div>
-      <div class="card-body  upload-input">¸
+      <div class="card-body pt-0 upload-input">
         <ngb-alert [type]="'primary'" [dismissible]="false">
-          {{ 'You can submit total of 2 pictures. Maximum size of each one is 5MB.' | translate}}
+          {{ 'You can submit total of 2 pictures' | translate}} <br>
+          <strong>{{ 'You must have atleast 1 picture for entry to be valid' | translate}}</strong>
         </ngb-alert>
         <div class="row">
-          <div class="col-md-12 xl-40 upload-space-sm p-0">
+          <div class="col-md-12 p-0 mb-3">
             <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
           </div>
-          <div class="col-xl-12 xl-60 upload-table">
+          <div class="col-xl-12 upload-table">
             <p>{{ 'Queue length' | translate}}: {{ uploader?.queue?.length }}</p>
             <div class="table-responsive">
               <table class="table">
@@ -68,7 +69,8 @@
           </div>
         </div>
         <div class="d-flex justify-content-end">
-          <button type="button" class="btn btn-primary btn-next" (click)="finishWithWizard()">{{ 'Finish' | translate
+          <button type="button" class="btn btn-primary btn-next" [disabled]="fileCount==0"
+            (click)="finishWithWizard()">{{ 'Finish' | translate
             }}</button>
         </div>
       </div>
