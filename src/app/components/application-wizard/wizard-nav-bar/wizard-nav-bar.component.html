@@ -6,15 +6,15 @@
           <aw-wizard navBarLayout="large-filled-symbols" [disableNavigationBar]="true">
             <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf041;', fontFamily: 'FontAwesome' }"
               [stepTitle]="isCroatianLanguageActive ?  'Mapa' : 'Map'">
-              <poke-map-input></poke-map-input>
+              <app-map-input></app-map-input>
             </aw-wizard-step>
             <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf09d;', fontFamily: 'FontAwesome' }"
               [stepTitle]="isCroatianLanguageActive ? 'Opće Informacije': 'General Information'">
-              <poke-information-input></poke-information-input>
+              <app-information-input></app-information-input>
             </aw-wizard-step>
             <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf03e;', fontFamily: 'FontAwesome' }"
               [stepTitle]="isCroatianLanguageActive ? 'Slike' : 'Pictures'">
-              <poke-upload-input></poke-upload-input>
+              <app-upload-input></app-upload-input>
             </aw-wizard-step>
           </aw-wizard>
         </div>
