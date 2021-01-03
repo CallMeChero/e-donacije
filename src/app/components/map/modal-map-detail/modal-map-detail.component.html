@@ -1,0 +1,101 @@
+<div class="modal-header">
+  <h4 class="modal-title txt-primary" id="modal-title">{{ 'Information about person' | translate }}</h4>
+  <a class="close" aria-label="Close" (click)="exitModal()">
+    <app-feather-icons [icon]="'x'"></app-feather-icons>
+  </a>
+</div>
+
+<div class="modal-body">
+  <ngb-tabset #t="ngbTabset" class="nav-tabss">
+    <ngb-tab id="tab-selectbyid1" [title]="title">
+      <ng-template ngbTabContent>
+        <div class="card mt-3">
+          <div class="d-flex">
+            <div class="col-md-6 p-0">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  {{ 'First Name' | translate}}: <strong>{{ person.firstName }}</strong>
+                </li>
+                <li class="list-group-item">
+                  {{ 'Last Name' | translate}}: <strong>{{ person.lastName }}</strong>
+                </li>
+                <li class="list-group-item">
+                  {{ 'Address' | translate}}: <strong>{{ person.address}}</strong>
+                </li>
+                <li class="list-group-item">
+                  {{ 'Address Number' | translate}}: <strong>{{ person.addressNumber }}</strong>
+                </li>
+                <li class="list-group-item">
+                  {{ 'Postal Code' | translate}}: <strong>{{ person.postalCode }}</strong>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6 p-0">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  {{ 'Bank Name' | translate}}:
+                  <strong>
+                    <span *ngIf="person.bankName; else noBank">{{ person.bankName}}</span>
+                    <ng-template #noBank>
+                      <span>{{ 'Empty' | translate}}</span>
+                    </ng-template>
+                  </strong>
+                </li>
+                <li class="list-group-item">
+                  {{ 'IBAN' | translate}}:
+                  <strong>
+                    <span *ngIf="person.iban; else noIBAN">{{ person.iban}}</span>
+                    <ng-template #noIBAN>
+                      <span>{{ 'Empty' | translate}}</span>
+                    </ng-template>
+                  </strong>
+                </li>
+                <li class="list-group-item">
+                  {{ 'Contact Number' | translate}}:
+                  <strong>
+                    <span>{{ person.contactNumber }}</span>
+                  </strong>
+                </li>
+                <li class="list-group-item">
+                  {{ 'Second Contact Number' | translate}}:
+                  <strong>
+                    <span *ngIf="person.secondContactNumber; else noIBAN">{{ person.secondContactNumber }}</span>
+                  </strong>
+                </li>
+                <li class="list-group-item">
+                  {{ 'Message' | translate}}:
+                  <strong>
+                    <span *ngIf="person.message; else noIBAN">
+                      {{ person.message}}
+                      <br>
+                      <a href="javascript:void(0)" (click)="sendMeToAutoTranslate(person.message)">Use auto
+                        translate</a>
+                    </span>
+                    <ng-template #noIBAN>
+                      <span #noIBAN>{{ 'Empty' | translate}}</span>
+                    </ng-template>
+                  </strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab id="tab-selectbyid2">
+      <ng-template ngbTabTitle>
+        {{ 'Images' | translate}}
+      </ng-template>
+      <ng-template ngbTabContent>
+        <div *ngIf="!imagesRect">
+          <h5>{{ 'Person didnt submit images' | translate }}</h5>
+        </div>
+        <ks-modal-gallery [id]="2" [modalImages]="imagesRect" [plainGalleryConfig]="customPlainGalleryRowDescConfig"
+          [currentImageConfig]="{downloadable: true}" [buttonsConfig]="buttonsConfigCustom"
+          (buttonBeforeHook)="onButtonBeforeHook($event)" (buttonAfterHook)="onButtonAfterHook($event)">
+        </ks-modal-gallery>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

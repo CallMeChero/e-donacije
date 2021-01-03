@@ -31,5 +31,14 @@ export class MapService {
         tap((data) => console.log('Get all markers', data))
       );
   }
+
+  getSingleLocationDetail(id: number): Observable<any> {
+    const url = this._urlHelper.getUrl(this.MAP_CONTROLLER, 'requestDetails', id.toString());
+    return this._http
+      .get<any>(url)
+      .pipe(
+        tap((data) => console.log('Get detail for marker', data))
+      );
+  }
   /* #endregion */
 }
