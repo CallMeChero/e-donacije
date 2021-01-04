@@ -7,6 +7,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { DashboardService } from './services/dashboard.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { GalleryModule } from '@ks89/angular-modal-gallery';
 
 @NgModule({
   declarations: [DashboardOverviewComponent],
@@ -16,6 +17,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     CarouselModule,
     NgxDatatableModule,
     LeafletModule.forRoot(),
+    GalleryModule.forRoot(),
     // Malo ruta pa nema potrebe za novim file-om
     RouterModule.forChild([
       {

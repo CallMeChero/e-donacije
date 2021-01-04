@@ -20,6 +20,26 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>{{ 'Earthquake Pictures' | translate}}</h5>
+        </div>
+        <div class="card-body" id="aniimated-thumbnials">
+          <owl-carousel-o [options]="owlcarousel14Options">
+            <ng-template carouselSlide class="item" [id]="i" *ngFor="let img of owlcarousel1; let i = index">
+              <img [src]="[img.img]" (click)="openImageModalRowDescription(img)" alt="">
+            </ng-template>
+          </owl-carousel-o>
+          <ks-modal-gallery [id]="2" [modalImages]="imagesRect" [plainGalleryConfig]="customPlainGalleryRowDescConfig"
+            [currentImageConfig]="{downloadable: true}" [buttonsConfig]="buttonsConfigCustom"
+            (buttonBeforeHook)="onButtonBeforeHook($event)" (buttonAfterHook)="onButtonAfterHook($event)">
+          </ks-modal-gallery>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row leaflet-custom">
     <div class="col-xl-12">
       <div class="card">

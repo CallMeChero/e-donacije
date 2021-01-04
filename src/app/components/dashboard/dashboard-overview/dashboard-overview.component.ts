@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
 import { CRO_COLUMS, ENG_COLUMNS } from '../models/consts/datatable-column';
 import * as L from 'leaflet';
+import { AdvancedLayout, Image, ButtonEvent, ButtonsConfig, ButtonsStrategy, KS_DEFAULT_BTN_CLOSE, KS_DEFAULT_BTN_DOWNLOAD, PlainGalleryConfig, PlainGalleryStrategy } from '@ks89/angular-modal-gallery';
 
 @Component({
   selector: 'app-dashboard-overview',
@@ -161,6 +162,157 @@ export class DashboardOverviewComponent implements OnInit {
     L.marker([el.geometry.coordinates[1],el.geometry.coordinates[0]], this.markerIcon)
       .addTo(this.map)
       .bindPopup(popupInfo);
+  }
+  /* #endregion */
+
+  /* #region  Gallery */
+  owlcarousel14Options = {
+    items: 1,
+    margin: 10,
+    autoHeight: true,
+    nav: false
+  }
+
+  customPlainGalleryRowDescConfig: PlainGalleryConfig = {
+    strategy: PlainGalleryStrategy.CUSTOM,
+    layout: new AdvancedLayout(-1, true)
+  };
+
+  owlcarousel1 = [
+    { id: 0, img: "assets/images/dashboard/3.jpg" },
+    { id: 1,img: "assets/images/dashboard/1.jpg" },
+    { id: 2, img: "assets/images/dashboard/2.jpg" },
+    { id: 3, img: "assets/images/dashboard/4.jpg" },
+    { id: 4, img: "assets/images/dashboard/5.jpg" },
+    { id: 5, img: "assets/images/dashboard/6.jpg" },
+    { id: 6, img: "assets/images/dashboard/7.jpg" },
+    { id: 7, img: "assets/images/dashboard/8.jpg" },
+    { id: 8, img: "assets/images/dashboard/9.jpg" },
+  ];
+
+  imagesRect: Image[] = [
+    new Image(
+      0,
+      { // modal
+        img: this.owlcarousel1[0].img,
+        extUrl: 'http://www.google.com',
+        description: 'Image Caption 3'
+      },
+      {
+        img: this.owlcarousel1[0].img,
+      }
+    ),
+    new Image(
+      1,
+      { // modal
+        img: this.owlcarousel1[1].img,
+        extUrl: 'http://www.google.com',
+        description: 'Image Caption 1'
+      }, {
+        img: this.owlcarousel1[1].img,
+      }
+    ),
+    new Image(
+      2,
+      { // modal
+        img: this.owlcarousel1[2].img,
+        extUrl: 'http://www.google.com',
+        description: 'Image Caption 2'
+      }, {
+        img: this.owlcarousel1[2].img,
+      }
+    ),
+    new Image(
+      3,
+      { // modal
+        img: this.owlcarousel1[3].img,
+        extUrl: 'http://www.google.com',
+        description: 'Image Caption 4'
+      },
+      {
+        img: this.owlcarousel1[3].img,
+      }
+    ),
+    new Image(
+      4,
+      { // modal
+        img: this.owlcarousel1[4].img,
+        extUrl: 'http://www.google.com',
+        description: 'Image Caption 5'
+      },
+      {
+        img: this.owlcarousel1[4].img,
+      }
+    ),
+    new Image(
+      5,
+      { // modal
+        img: this.owlcarousel1[5].img,
+        extUrl: 'http://www.google.com',
+        description: 'Image Caption 6'
+      },
+      {
+        img: this.owlcarousel1[5].img,
+      }
+    ),
+    new Image(
+      6,
+      { // modal
+        img: this.owlcarousel1[6].img,
+        extUrl: 'http://www.google.com',
+        description: 'Image Caption 7'
+      },
+      {
+        img: this.owlcarousel1[6].img,
+      }
+    ),
+    new Image(
+      7,
+      { // modal
+        img: this.owlcarousel1[7].img,
+        extUrl: 'http://www.google.com',
+        description: 'Image Caption 8'
+      },
+      {
+        img: this.owlcarousel1[7].img,
+      }
+    ),
+    new Image(
+      8,
+      { // modal
+        img: this.owlcarousel1[8].img,
+        extUrl: 'http://www.google.com',
+        description: 'Image Caption 9'
+      },
+      {
+        img: this.owlcarousel1[8].img,
+      }
+    )];
+
+  buttonsConfigCustom: ButtonsConfig = {
+    visible: true,
+    strategy: ButtonsStrategy.CUSTOM,
+    buttons: [
+      KS_DEFAULT_BTN_DOWNLOAD,
+      KS_DEFAULT_BTN_CLOSE
+    ]
+  };
+
+  onButtonBeforeHook(event: ButtonEvent) {
+    if (!event || !event.button) {
+      return;
+    }
+  }
+
+  onButtonAfterHook(event: ButtonEvent) {
+    if (!event || !event.button) {
+      return;
+    }
+  }
+
+  openImageModalRowDescription() {
+    const index: number = 0;
+    this.customPlainGalleryRowDescConfig = Object.assign({}, this.customPlainGalleryRowDescConfig, { layout: new AdvancedLayout(index, true) });
   }
   /* #endregion */
 
