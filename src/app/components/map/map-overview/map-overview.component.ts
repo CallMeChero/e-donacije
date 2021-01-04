@@ -142,7 +142,7 @@ export class MapOverviewComponent {
       <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Kontakt Broj' : 'Contact Number'}:</strong>${response.contactNumber}</li>
       <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Drugi Kontakt Broj' : 'Second Contact Number'}:</strong>${response.secondContactNumber}</li>
       <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Banka' : 'Bank Name'}:</strong>${response.bankName ? response.bankName : '/'}</li>
-      <li class="list-group-item"><strong class="mr-1">IBAN:</strong>${response.iban ? response.iban : '/'}</li>
+      <li class="list-group-item"><strong class="mr-1">IBAN:</strong>${response.iban ? 'HR' + response.iban : '/'}</li>
     </ul>
     ${ response.message ? `<div class="mt-1">
     <p class="mb-0" style="border-bottom: 1px solid #808080"> ${this.activeLang == 'hr' ? 'Poruka' : 'Message'} </p>
