@@ -137,9 +137,17 @@ export class MapOverviewComponent {
     <ul class="list-group">
       <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Ime' : 'First Name'}:</strong>${this.titlecasePipe.transform(response.firstName)}</li>
       <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Prezime' : 'Last Name'}:</strong>${this.titlecasePipe.transform(response.lastName)}</li>
+      <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Adresa' : 'Address'}:</strong>${response.address + ', ' + response.addressNumber}</li>
+      <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Poštanski Broj' : 'Postal Code'}:</strong>${ response.postalCode }</li>
       <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Kontakt Broj' : 'Contact Number'}:</strong>${response.contactNumber}</li>
       <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Drugi Kontakt Broj' : 'Second Contact Number'}:</strong>${response.secondContactNumber}</li>
-    </ul>`
+      <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Banka' : 'Bank Name'}:</strong>${response.bankName ? response.bankName : '/'}</li>
+      <li class="list-group-item"><strong class="mr-1">IBAN:</strong>${response.iban ? response.iban : '/'}</li>
+    </ul>
+    ${ response.message ? `<div class="mt-1">
+    <p class="mb-0" style="border-bottom: 1px solid #808080"> ${this.activeLang == 'hr' ? 'Poruka' : 'Message'} </p>
+    <p> ${response.message} </p>
+    </div>`: '' }`
   }
   /* #endregion */
 
@@ -155,7 +163,6 @@ export class MapOverviewComponent {
     visible: true,
     strategy: ButtonsStrategy.CUSTOM,
     buttons: [
-      KS_DEFAULT_BTN_FULL_SCREEN,
       KS_DEFAULT_BTN_DOWNLOAD,
       KS_DEFAULT_BTN_CLOSE
     ]
