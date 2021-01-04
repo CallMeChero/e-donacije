@@ -4,9 +4,10 @@ import { MapService } from '../services/map.service';
 import { take } from 'rxjs/operators';
 import { IMapLatitudeLongitude } from '../models/response/map-latitude-longitude';
 import { TranslateService } from '@ngx-translate/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MapDetailDetermintator } from '../services/determinators/map-detail.determinator';
 import { AdvancedLayout, PlainGalleryConfig, PlainGalleryStrategy, Image, ButtonsConfig, ButtonsStrategy, KS_DEFAULT_BTN_FULL_SCREEN, KS_DEFAULT_BTN_DOWNLOAD, KS_DEFAULT_BTN_CLOSE, ButtonEvent } from '@ks89/angular-modal-gallery';
+import { responsivePopup } from 'leaflet-responsive-popup';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-map-overview',
@@ -53,8 +54,8 @@ export class MapOverviewComponent {
   constructor(
     private _mapService: MapService,
     private _translateService: TranslateService,
-    private modalService: NgbModal,
-    private mapDetailDeterminator: MapDetailDetermintator
+    private mapDetailDeterminator: MapDetailDetermintator,
+    private titlecasePipe:TitleCasePipe
   ) {
     this.activeLang = _translateService.currentLang;
     this._translateService.onLangChange.subscribe(response => {
@@ -105,9 +106,12 @@ export class MapOverviewComponent {
       this._mapService.getSingleLocationDetail(activeLocation.id).pipe(take(1))
           .subscribe(response => {
             this.mapDetailDeterminator.changeSelectedRow(response);
-            e.target.bindPopup(this.popupTemplate(response)).openPopup();
-            let element:HTMLElement = document.getElementById('auto_trigger') as HTMLElement;
-            element.click();
+            const popup = responsivePopup().setContent(this.popupTemplate(response));
+            e.target.bindPopup(popup).openPopup();
+            if(response.images && response.images.length) {
+              let element:HTMLElement = document.getElementById('auto_trigger') as HTMLElement;
+              element.click();
+            }
           });
     }
   }
@@ -127,14 +131,14 @@ export class MapOverviewComponent {
 
   popupTemplate(response) {
     return `
-    <div class="alert leaflet-alert  alert-primary" role="alert">
-        ${this.activeLang == 'hr' ? 'Osnovni podaci' : 'General information'}
+    <div class="alert leaflet-alert  alert-primary" style="text-align:center;" role="alert">
+      <h5 class="mb-0">${this.activeLang == 'hr' ? 'Osnovni podaci' : 'General information'}</h5>
     </div>
-    <ul class="list-group" style="max-height: 300px;">
-      <li class="list-group-item"><strong>${this.activeLang == 'hr' ? 'Ime' : 'First Name'}:</strong>${response.firstName}</li>
-      <li class="list-group-item"><strong>${this.activeLang == 'hr' ? 'Prezime' : 'Last Name'}:</strong>${response.lastName}</li>
-      <li class="list-group-item"><strong>${this.activeLang == 'hr' ? 'Kontakt Broj' : 'Contact Number'}:</strong>${response.contactNumber}</li>
-      <li class="list-group-item"><strong>${this.activeLang == 'hr' ? 'Kontakt Broj 2' : 'Contact Number'}:</strong>${response.secondContactNumber}</li>
+    <ul class="list-group">
+      <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Ime' : 'First Name'}:</strong>${this.titlecasePipe.transform(response.firstName)}</li>
+      <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Prezime' : 'Last Name'}:</strong>${this.titlecasePipe.transform(response.lastName)}</li>
+      <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Kontakt Broj' : 'Contact Number'}:</strong>${response.contactNumber}</li>
+      <li class="list-group-item"><strong class="mr-1">${this.activeLang == 'hr' ? 'Drugi Kontakt Broj' : 'Second Contact Number'}:</strong>${response.secondContactNumber}</li>
     </ul>`
   }
   /* #endregion */

@@ -1,4 +1,4 @@
 export interface ISummary {
-  finished: number;
-  unfinished: number;
+  requests: number;
+  images: number;
 }

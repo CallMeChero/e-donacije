@@ -90,4 +90,10 @@ export class SidebarComponent {
     }
   }
 
+  colapseSidebar(): void {
+    if(window.innerWidth < 991) {
+      this.navServices.collapseSidebar = true;
+    }
+  }
+
 }

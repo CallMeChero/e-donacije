@@ -11,7 +11,6 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { NavService } from "./services/nav.service";
 import { ToggleFullscreenDirective } from "./directives/fullscreen.directive";
 import { TranslateModule } from '@ngx-translate/core';
-import { LoaderComponent } from './components/loader/loader.component';
 import { CustomizerComponent } from './components/customizer/customizer.component';
 import { CustomizerService } from './services/customizer.service';
 import { DateLocalePipe } from './services/utils/date-locale.pipe';
@@ -30,7 +29,6 @@ import { ChartsModule } from 'ng2-charts';
     BreadcrumbComponent,
     CustomizerComponent,
     ToggleFullscreenDirective,
-    LoaderComponent,
     DateLocalePipe,
     ConfirmationModalComponent
   ],
@@ -49,7 +47,6 @@ import { ChartsModule } from 'ng2-charts';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    LoaderComponent,
     DateLocalePipe,
     ConfirmationModalComponent,
     CountToModule

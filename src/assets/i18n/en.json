@@ -18,7 +18,7 @@
   "Dark layout": "Dark layout",
   "Light layout": "Light layout",
   "Total Finished": "Total Finished",
-  "In Process": "In Process",
+  "In Process": "Total applies",
   "Earthquakes Today": "Bigger Earthquakes",
   "Total Pictures": "Total Pictures",
   "Dear people": "Dear people",
@@ -82,8 +82,8 @@
   "For foreign transactions": "For foreign transactions",
   "Bank Name": "Bank Name",
   "Bank Name must contain up to 25 characters": "Bank Name must contain up to 25 characters",
-  "Earthquake Map": "Earthquake Map",
-  "Earthquake Table": "Earthquake Table",
+  "Earthquake Map": "Map Of Strong Earthquakes",
+  "Earthquake Table": "Table Of Strong Earthquakes",
   "I Want to donate": "I Want to donate",
   "You might find useful to get SWIFT/BIC codes of Croatian Banks": "You might find useful to get SWIFT/BIC codes of Croatian Banks",
   "Furthermore here you can find VBDI codes here": "Furthermore here you can find VBDI codes here",
@@ -104,5 +104,8 @@
   "Images": "Images",
   "Empty": "Empty",
   "Information about person": "Information about person",
-  "Person didnt submit images": "Person didn't submit images"
+  "Person didnt submit images": "Person didn't submit images",
+  "Fields marked with": "Fields marked with ",
+  "are required": "(with star) are required",
+  "Have questions?": "Do you have a question, suggestion or accidentally entered incorrect data? Contact us!"
 }

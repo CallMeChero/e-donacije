@@ -3,9 +3,10 @@
     <div class="calender-widget">
       <div class="cal-img"></div>
       <div class="cal-date">
-        <h5>{{ 'Contact Us' | translate}}</h5>
+        <h5 class="txt-primary">{{ 'Contact Us' | translate}}</h5>
       </div>
       <div class="cal-desc text-center card-body">
+        <h5 class="txt-primary mb-4"> {{ 'Have questions?' | translate }} </h5>
         <form class="theme-form" [formGroup]="contactGroup" #ngContactForm="ngForm" (ngSubmit)="sendForm()">
           <div class="form-group">
             <label for="exampleInputName">{{ 'Your Name' | translate }}</label>

@@ -13,7 +13,12 @@ import { fadeInRight } from 'ng-animate';
 })
 export class ContentLayoutComponent implements AfterViewInit {
 
-  constructor(public navServices: NavService, public customizer: CustomizerService) {   }
+  moduleLoading: boolean;
+
+  constructor(
+    public navServices: NavService,
+    public customizer: CustomizerService
+  ) { }
 
   ngAfterViewInit() {
     setTimeout(() => {

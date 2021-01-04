@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FileLikeObject, FileUploader, FileUploaderOptions } from 'ng2-file-upload';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { take } from 'rxjs/operators';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ApplicationWizardService } from '../services/application-wizard.service';
 import { RequestIdDeterminator } from '../services/determinators/request-id.determinator';
@@ -32,7 +32,6 @@ export class UploadInputComponent implements OnInit {
     private _notificationService: NotificationService,
     private _requestIdDeterminator: RequestIdDeterminator,
     private _router: Router,
-    private _ngxSpinner: NgxSpinnerService,
     private _applicationWizardService: ApplicationWizardService
   ) {
     this.activeLang = _translateService.currentLang;
@@ -60,11 +59,34 @@ export class UploadInputComponent implements OnInit {
   }
 
   removeFile(file) {
-    if(file.isUploading || file.isSuccess) {
+    if(!file.id) {
+      // nije poslan na server
+      file.remove();
       return false;
+    } else if(file.isSuccess && file.isUploaded) {
+      // na serveru je
+      this.fileCount = this.fileCount - 1;
+      this._applicationWizardService.removeFile(file.id).pipe(take(1)).subscribe(
+        data => { console.log('Uspjesno brisanje file-a') }
+      );
+      file.remove();
     } else {
-      this._applicationWizardService.removeFile(file.id);
-      file.remove()
+      return
+    }
+  }
+
+  removeAllFiles() {
+    if(this.uploader.queue.length) {
+      this.uploader.queue.forEach((file: any) => {
+        if(file && file.id) {
+          this.fileCount = this.fileCount - 1;
+          this._applicationWizardService.removeFile(file.id).pipe(take(1)).subscribe(
+            data => { console.log('Uspjesno brisanje file-a') }
+          );
+        }
+
+      })
+      setTimeout(() => { this.uploader.clearQueue() }, 100);
     }
   }
 
@@ -72,11 +94,7 @@ export class UploadInputComponent implements OnInit {
     item.id = response;
     this.fileCount = this.fileCount + 1;
     if(this.fileCount >= 2) {
-      this._ngxSpinner.show();
-      setTimeout(() => {
-        this._ngxSpinner.hide()
         this.finishWithWizard();
-      },500)
     }
   }
 
@@ -111,6 +129,7 @@ export class UploadInputComponent implements OnInit {
   }
 
   finishWithWizard(): void {
+    console.log(this.fileCount)
     const title = this.activeLang !== 'hr' ? "Uspjeh": "Success";
     this._notificationService.fireSuccessMessage(title,
       this.activeLang == 'hr' ? "Zahtjev je uspješno kreiran.":

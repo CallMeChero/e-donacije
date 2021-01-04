@@ -6,7 +6,7 @@
   <ul class="sidebar-menu">
     <li *ngFor="let menuItem of menuItems" [ngClass]="{active: menuItem.active}">
       <!-- Sub -->
-      <a href="javascript:void(0)" class="sidebar-header" *ngIf="menuItem.type === 'sub'"
+      <a href="javascript:void(0)" class="sidebar-header" (click)="colapseSidebar()" *ngIf="menuItem.type === 'sub'"
         (click)="toggletNavActive(menuItem)">
         <app-feather-icons [icon]="menuItem.icon"></app-feather-icons><span>{{menuItem.title | translate}}<span
             class="badge badge-{{menuItem.badgeType}} ml-3" *ngIf="menuItem.badgeType">{{menuItem.badgeValue |
@@ -14,8 +14,8 @@
         <i class="fa fa-angle-right pull-right" *ngIf="menuItem.children"></i>
       </a>
       <!-- Link -->
-      <a [routerLink]="!menuItem.type ? null : [menuItem.path]" routerLinkActive="active" class="sidebar-header"
-        *ngIf="menuItem.type === 'link'">
+      <a [routerLink]="!menuItem.type ? null : [menuItem.path]" (click)="colapseSidebar()" routerLinkActive="active"
+        class="sidebar-header" *ngIf="menuItem.type === 'link'">
         <app-feather-icons [icon]="menuItem.icon"></app-feather-icons><span>{{menuItem.title | translate}}<span
             class="badge badge-{{menuItem.badgeType}} ml-3" *ngIf="menuItem.badgeType">{{menuItem.badgeValue |
             translate}}</span></span>

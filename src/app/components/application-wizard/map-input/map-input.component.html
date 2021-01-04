@@ -1,14 +1,18 @@
-<div class="col-xl-12">
-  <div class="card-header d-flex justify-content-between align-items-center pr-0 pl-0">
-    <h5>{{ 'Put marker on your location' | translate }}</h5>
-    <button class="btn btn-primary btn-next" (click)="saveMarker()" *ngIf="map && map.hasLayer(newMarker)">{{
-      'Next' | translate}}
-    </button>
+<div class="row leaflet-custom">
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center pr-0 pl-0">
+        <h5>{{ 'Put marker on your location' | translate }}</h5>
+        <button class="btn btn-primary btn-next" (click)="saveMarker()" *ngIf="map && map.hasLayer(newMarker)">{{
+          'Next' | translate}}
+        </button>
+      </div>
+      <div class="card-body p-0">
+        <div class="map-height" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
+      </div>
+      <button style="display:none;" id="auto_trigger" awNextStep>{{
+        'Next' | translate}}
+      </button>
+    </div>
   </div>
-  <div class="card-body p-0 leaflet-custom">
-    <div class="map-height" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
-  </div>
-  <button style="display:none;" id="auto_trigger" awNextStep>{{
-    'Next' | translate}}
-  </button>
 </div>

@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as L from 'leaflet';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs/operators';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { IApplicationMap } from '../models/request/application-map';
@@ -58,8 +57,7 @@ export class MapInputComponent implements OnInit {
     private _translateService: TranslateService,
     private _ref: ChangeDetectorRef,
     private _latitudeLongitudeDeterminator: LatitudeLongitudeDeterminator,
-    private _router: Router,
-    private _spinner: NgxSpinnerService
+    private _router: Router
   ) { }
 
   ngOnInit(): void {}

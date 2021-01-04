@@ -1,33 +1,6 @@
 /**=====================
      04. Loader CSS Start
 ==========================**/
-.loader-wrapper{
-  height: 100%;
-  width: 100%;
-  display: block;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  background-color: $white;
-  z-index: 1001;
-  top: 0;
-  .loader{
-    position: absolute;
-    top: 50%;
-    left: 0;
-    text-align: center;
-    right: 0;
-    margin: 0 auto;
-    h4{
-      margin-top: 50px;
-      margin-bottom: 0;
-      span{
-        font-size: 34px;
-        color: #FFC107;
-      }
-    }
-  }
-}
 .loader {
   .line {
     animation: expand 1s ease-in-out infinite;

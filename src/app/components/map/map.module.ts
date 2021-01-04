@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { MapOverviewComponent } from './map-overview/map-overview.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
@@ -33,6 +33,9 @@ import { GalleryModule } from '@ks89/angular-modal-gallery';
         pathMatch: 'full'
       }
     ])
+  ],
+  providers: [
+    TitleCasePipe
   ],
   entryComponents: [ ModalMapDetailComponent ]
 })

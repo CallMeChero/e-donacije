@@ -65,7 +65,8 @@
             "styles": [
               "src/styles.scss",
               "src/assets/scss/app.scss",
-              "node_modules/leaflet/dist/leaflet.css"
+              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/leaflet-responsive-popup/leaflet.responsive.popup.css"
             ],
             "scripts": []
           },

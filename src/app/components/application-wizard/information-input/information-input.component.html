@@ -1,5 +1,11 @@
+<ngb-alert class="mt-3 mb-2 d-flex justify-content-center" [type]="'primary'" [dismissible]="false">
+  <strong>{{ 'Fields marked with' | translate }}
+    <span class="text-danger ml-1">*</span>
+    {{ 'are required' | translate}}
+  </strong>
+</ngb-alert>
 <form [formGroup]="informationGroup" class="ngx-form" novalidate>
-  <div class="row mt-5 mb-1">
+  <div class="row mb-1">
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  mb-3">
       <div class="form-group">
         <label class="control-label" for="firstName">{{ 'First Name' | translate }}<span

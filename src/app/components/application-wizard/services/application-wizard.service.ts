@@ -64,7 +64,7 @@ export class ApplicationWizardService {
       );
   }
 
-  // Send marker lang & lat
+  // Remove file
   removeFile(id: string): Observable<any> {
     const url = this._urlHelper.getUrl('DonationRequestImage/deleteImage', id);
     return this._http

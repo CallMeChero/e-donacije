@@ -17,7 +17,7 @@ export class DashboardService {
   /* #region  Variables */
   dateNow: string;
   yesterday: string;
-  private readonly TICKER_CONTROLER = 'tickets';
+  private readonly DASHBOARD_CONTROLLER = 'DonationRequest';
   private readonly EARTHQUAKE_API = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
   /* #endregion */
 
@@ -54,13 +54,12 @@ export class DashboardService {
   }
 
   // total visits
-  getSummary(): Observable<EDonacijeResponse<ISummary>> {
-    const url = this._urlHelper.getUrl(this.TICKER_CONTROLER, 'summary');
-    const requestParams = this._urlHelper.getQueryParameters({finished: true });
+  getSummary(): Observable<ISummary> {
+    const url = this._urlHelper.getUrl(this.DASHBOARD_CONTROLLER,'getForDashboard');
     return this._http
-      .get<EDonacijeResponse<ISummary>>(url,{ params: requestParams })
+      .get<ISummary>(url)
       .pipe(
-        tap((data) => console.log('Get all sumaries', data)),
+        tap((data) => console.log('Get all dashboard info', data)),
         catchError(this.handleError)
       );
   }

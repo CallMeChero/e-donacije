@@ -19,26 +19,21 @@ import * as L from 'leaflet';
 export class DashboardOverviewComponent implements OnInit {
 
   /* #region  Variables */
-  dashboardSlider: IOwlSlider[] = [{
-    id: 1,
-    icon: 'check-square',
-    title: 'Total Finished',
-    number: 0
-  },
+  dashboardSlider: IOwlSlider[] = [
   {
-    id: 2,
+    id: 1,
     icon: 'external-link',
     title: 'In Process',
     number: 0
   },
   {
-    id: 3,
+    id: 2,
     icon: 'activity',
     title: 'Earthquakes Today',
     number: 0
   },
   {
-    id: 4,
+    id: 3,
     icon: 'crop',
     title: 'Total Pictures',
     number: 0
@@ -90,36 +85,8 @@ export class DashboardOverviewComponent implements OnInit {
 
   /* #region  Methods */
   ngOnInit(): void {
-    this._dashboardService.getRecentEarthquakes().pipe(
-      first()
-    ).subscribe(
-      response => {
-        this.dashboardSlider[2].number = response.metadata?.count ?? 0;
-        if(response?.features) {
-          const res = response.features;
-          res.forEach(
-            el => {
-              this.initMarkers(el);
-              this.earthquakes.push(el);
-              this.earthquakeRows.push({
-                mag: el.properties.mag,
-                place: el.properties.place,
-                time: moment(el.properties.time).format("DD.MM.YYYY HH:mm:ss")
-              });
-              this.earthquakeRows = [...this.earthquakeRows];
-            }
-          )
-        }
-      }
-    )
-    // this._dashboardService.getSummary().pipe(
-    //   take(1),
-    //   map(res => res.response.data)
-    //   ).subscribe(
-    //   (response: ISummary) => {
-    //     this.dashboardSlider[0].number = response.finished; this.dashboardSlider[1].number = response.unfinished
-    //   }
-    // )
+    this.getEarthquakeData();
+    this.getSummaryData()
     this.watchForLangChange();
   }
 
@@ -140,6 +107,42 @@ export class DashboardOverviewComponent implements OnInit {
         })},100)
       }
     });
+  }
+
+  getEarthquakeData() {
+    this._dashboardService.getRecentEarthquakes().pipe(
+      first()
+    ).subscribe(
+      response => {
+        this.dashboardSlider[1].number = response.metadata?.count ?? 0;
+        if(response?.features) {
+          const res = response.features;
+          res.forEach(
+            el => {
+              this.initMarkers(el);
+              this.earthquakes.push(el);
+              this.earthquakeRows.push({
+                mag: el.properties.mag,
+                place: el.properties.place,
+                time: moment(el.properties.time).format("DD.MM.YYYY HH:mm:ss")
+              });
+              this.earthquakeRows = [...this.earthquakeRows];
+            }
+          )
+        }
+      }
+    )
+  }
+
+  getSummaryData():void {
+    this._dashboardService.getSummary().pipe(
+      take(1)
+    ).subscribe(
+      (response: ISummary) => {
+        this.dashboardSlider[0].number = response.requests;
+        this.dashboardSlider[2].number = response.images;
+      }
+    )
   }
 
   onMapReady(map: L.Map): void {

@@ -1024,12 +1024,6 @@ body {
 				color: $white;
 			}
 		}
-		.loader-wrapper {
-			background-color: $dark-body-background ;
-			.loader {
-				background-color: $dark-body-background !important;
-			}
-		}
 		.page-wrapper {
 			/* Main Header start */
 			.Typeahead-menu {
@@ -7396,12 +7390,6 @@ body {
 		.nav-dark ,.nav-pills.nav-dark{
 			.nav-link{
 				color: $white;
-			}
-		}
-		.loader-wrapper {
-			background-color: $dark-body-background ;
-			.loader {
-				background-color: $dark-body-background !important;
 			}
 		}
 		.lg-backdrop {

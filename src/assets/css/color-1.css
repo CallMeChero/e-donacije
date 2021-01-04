@@ -2516,29 +2516,6 @@ table tbody .border-bottom-warning td {
 /**=====================
      04. Loader CSS Start
 ==========================**/
-.loader-wrapper {
-  height: 100%;
-  width: 100%;
-  display: block;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  background-color: #fff;
-  z-index: 1001;
-  top: 0; }
-  .loader-wrapper .loader {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    text-align: center;
-    right: 0;
-    margin: 0 auto; }
-    .loader-wrapper .loader h4 {
-      margin-top: 50px;
-      margin-bottom: 0; }
-      .loader-wrapper .loader h4 span {
-        font-size: 34px;
-        color: #FFC107; }
 
 .loader .line {
   animation: expand 1s ease-in-out infinite;
@@ -13471,10 +13448,6 @@ body.dark-only {
     fill: rgba(0, 0, 0, 0.7) !important; }
   body.dark-only .nav-dark .nav-link, body.dark-only .nav-pills.nav-dark .nav-link {
     color: #fff; }
-  body.dark-only .loader-wrapper {
-    background-color: #293240; }
-    body.dark-only .loader-wrapper .loader {
-      background-color: #293240 !important; }
   body.dark-only .page-wrapper {
     /* Main Header start */
     /* Main Header ends */ }
@@ -16443,10 +16416,6 @@ body.dark-body-only .google-visualization-tooltip text {
   fill: rgba(0, 0, 0, 0.7) !important; }
 body.dark-body-only .nav-dark .nav-link, body.dark-body-only .nav-pills.nav-dark .nav-link {
   color: #fff; }
-body.dark-body-only .loader-wrapper {
-  background-color: #293240; }
-  body.dark-body-only .loader-wrapper .loader {
-    background-color: #293240 !important; }
 body.dark-body-only .lg-backdrop {
   background-color: #293240; }
 body.dark-body-only .lg-outer .lg-thumb-outer {
