@@ -60,7 +60,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/i18n"
+              "src/web.config"
             ],
             "styles": [
               "src/styles.scss",
@@ -113,7 +113,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "e-donacije:build"
+            "browserTarget": "e-donacije:build:production"
           }
         },
         "test": {
