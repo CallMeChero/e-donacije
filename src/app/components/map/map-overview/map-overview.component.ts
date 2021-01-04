@@ -1,12 +1,10 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import * as L from 'leaflet';
-import { HttpClient } from "@angular/common/http";
 import { MapService } from '../services/map.service';
 import { take } from 'rxjs/operators';
 import { IMapLatitudeLongitude } from '../models/response/map-latitude-longitude';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalMapDetailComponent } from '../modal-map-detail/modal-map-detail.component';
 import { MapDetailDetermintator } from '../services/determinators/map-detail.determinator';
 import { AdvancedLayout, PlainGalleryConfig, PlainGalleryStrategy, Image, ButtonsConfig, ButtonsStrategy, KS_DEFAULT_BTN_FULL_SCREEN, KS_DEFAULT_BTN_DOWNLOAD, KS_DEFAULT_BTN_CLOSE, ButtonEvent } from '@ks89/angular-modal-gallery';
 
@@ -67,12 +65,13 @@ export class MapOverviewComponent {
     this.mapDetailDeterminator.person.subscribe(
       data => {
         this.activePerson = data;
+        this.imagesRect = [];
         this.activePerson?.images.forEach((image, index) => {
           this.imagesRect.push(
             new Image( index,
               {
                 img: image,
-                description: 'Image Caption ' + index
+                description: `${this.activePerson.firstName } ${this.activePerson.lastName} - ${index}`
               }, {
                 img: image,
               })
